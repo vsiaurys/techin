@@ -8,7 +8,7 @@ public class Reprint {
 
         System.out.println("How many times?");
         int times = Integer.valueOf(scan.nextLine());
-        
+
         for (int i = 1; i <= times; i++) {
             printText();
         }
