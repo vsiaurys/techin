@@ -7,8 +7,7 @@ public class DivisibleByThree {
 
     public static void divisibleByThreeInRange(int beginning, int end) {
         for (int i = beginning; i <= end; i++) {
-            int reminder = i % 3;
-            if (reminder == 0) {
+            if (i % 3 == 0) {
                 System.out.println(i);
             }
         }
