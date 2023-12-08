@@ -6,7 +6,7 @@ public class RepeatingBreakingAndRemembering {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
-        
+
 //        // Part 5
         int number = 0;
         int sum = 0;
