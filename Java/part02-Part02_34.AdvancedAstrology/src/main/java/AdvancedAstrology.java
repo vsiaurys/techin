@@ -35,6 +35,6 @@ public class AdvancedAstrology {
 
     public static void main(String[] args) {
         //printTriangle(5);
-        christmasTree(11);
+        christmasTree(6);
     }
 }
