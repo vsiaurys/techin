@@ -11,6 +11,7 @@ public class Song {
         this.durationInSeconds = durationInSeconds;
     }
 
+    @Override
     public boolean equals(Object compared) {
         if (this == compared) {
             return true;
