@@ -4,12 +4,8 @@ public class HealthStation {
     private int counter;
 
     public int weigh(Person person) {
-        if (person != null) {
-            counter++;
-            return person.getWeight();
-        }
-
-        return -1;
+        counter++;
+        return person.getWeight();
     }
 
     public void feed(Person person) {
