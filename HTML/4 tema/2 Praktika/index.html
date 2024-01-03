@@ -25,7 +25,7 @@
           type="text"
           id="phone"
           placeholder="+370-xxx-xxxxx"
-          pattern="\+[0-9]{3}[\-][0-9]{3}[\-][0-9]{5}"
+          pattern="\+[0-9]{3}-[0-9]{3}-[0-9]{5}"
           required
         />
       </div>
@@ -39,13 +39,7 @@
             >Jūsų mėgstamiausios internetinės svetainės adresas:</label
           >
         </p>
-        <input
-          type="text"
-          id="url-address"
-          placeholder="url adresas"
-          pattern="http:\/\/www.[A-Za-z]+.[A-Za-z]+"
-          required
-        />
+        <input type="url" id="url-address" placeholder="url adresas" required />
       </div>
       <div>
         <p><label for="date-of-birth">Jūsų gimimo data:</label></p>
@@ -67,7 +61,7 @@
           type="text"
           id="post-code"
           placeholder="XX-01234"
-          pattern="[A-Z]{2}[\-][0-9]{5}"
+          pattern="[A-Z]{2}-[0-9]{5}"
           required
         />
       </div>
