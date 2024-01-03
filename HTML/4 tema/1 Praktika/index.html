@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="lt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form action="#" method="post">
+      Title<br />
+      <input type="radio" name="kreipinys" value="Mr" id="mr" required />
+      <label for="mr">Mr</label>
+      <input type="radio" name="kreipinys" value="Mrs" id="mrs" required />
+      <label for="mrs">Mrs</label>
+      <input type="radio" name="kreipinys" value="Miss" id="miss" required />
+      <label for="miss">Miss</label>
+      <div>
+        <label for="firstname">First name</label><br />
+        <input type="text" id="firstname" required />
+      </div>
+      <div>
+        <label for="lastname">Last name</label><br />
+        <input type="text" id="lastname" required />
+      </div>
+      <div>
+        <label for="email">Email</label><br />
+        <input type="email" id="email" required />
+      </div>
+      <div>
+        <label for="phone">Phone number</label><br />
+        <input type="text" id="phone" placeholder="+370 ... ....." required />
+      </div>
+      <div>
+        <label for="password">Password</label><br />
+        <input type="password" id="password" required />
+      </div>
+      <div>
+        <label for="country">Country</label><br />
+        <select id="country" required>
+          <option value="">---Choose country---</option>
+          <option value="Lithuania">Lithuania</option>
+          <option value="USA">USA</option>
+          <option value="UK">UK</option>
+        </select>
+      </div>
+      <div>
+        <input type="checkbox" id="terms" required />
+        <label for="terms"
+          >I agree to the
+          <a href="PAGES/terms-and-conditions.html"
+            >terms and conditions</a
+          ></label
+        ><br />
+      </div>
+      <div>
+        <input type="submit" id="submit" value="Sign up" />
+        <input type="reset" id="reset" value="Reset form" />
+      </div>
+    </form>
+  </body>
+</html>
