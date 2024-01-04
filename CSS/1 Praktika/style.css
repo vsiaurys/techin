@@ -47,9 +47,9 @@ p#special2 span {
 
 /* Change the style of multilevel list in <div> element: first level of list darkblue, second - pupple */
 /* Kelių lygių sąrašo, esančio div elemente, pirmojo lygmens spalva: darkblue, antrojo: pupple */
-div > ul {
+div ul {
   color: darkblue;
 }
-div > ul > li > ul {
+div ul ul {
   color: purple;
 }
