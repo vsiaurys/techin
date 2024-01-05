@@ -1,0 +1,44 @@
+div {
+  width: 500px;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+  margin: 0 auto;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type="text"] {
+  border: 1px solid green;
+}
+
+input[type="email"] {
+  border: 1px solid blue;
+}
+input[type="password"] {
+  border: 1px solid pink;
+}
+select[name="country"] {
+  border: 1px solid yellow;
+  background-color: white;
+}
+input[type="submit"] {
+  background-color: red;
+}
+input[type="reset"] {
+  background-color: pink;
+}
+
+input:hover,
+select:hover {
+  background-color: aquamarine;
+}
