@@ -1,0 +1,20 @@
+.container {
+  width: 500px;
+  border: 2px solid darkslategray;
+  padding: 2em;
+  margin: 5em auto;
+}
+
+/* CSS stilius įterpti čia */
+li {
+  list-style: none;
+}
+
+li::before {
+  content: "\204E";
+  font-size: 2em;
+}
+
+li.active::before {
+  color: goldenrod;
+}
