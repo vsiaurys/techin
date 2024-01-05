@@ -1,0 +1,20 @@
+* {
+  margin: 0;
+}
+p:nth-child(even) {
+  background-color: beige;
+  padding: 50px;
+}
+p:nth-child(odd) {
+  background-color: azure;
+  padding: 50px;
+}
+
+p:nth-child(even):hover {
+  font-style: italic;
+  background-color: aquamarine;
+}
+p:nth-child(odd):hover {
+  font-weight: bold;
+  background-color: lightgray;
+}
