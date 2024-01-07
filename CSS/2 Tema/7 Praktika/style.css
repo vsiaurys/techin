@@ -1,0 +1,11 @@
+li {
+  list-style: none;
+  padding: 5px 0;
+}
+
+a[href*="cv"]::before {
+  content: "\265B";
+}
+a[href*="darb"]::after {
+  content: "\265E";
+}
