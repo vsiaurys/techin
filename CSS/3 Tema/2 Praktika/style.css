@@ -1,0 +1,50 @@
+* {
+  margin: 0;
+  font-family: "Lato", sans-serif;
+}
+
+body {
+  background-color: #d5ebe7;
+  box-sizing: content-box;
+}
+
+article {
+  width: 300px;
+  margin: 25px auto;
+  padding: 10px;
+  background-color: white;
+  box-shadow: 5px 5px #9eb2ae;
+}
+
+header {
+  border: 1px solid black;
+  padding: 20px;
+}
+
+header h1 {
+  text-transform: uppercase;
+}
+
+section {
+  margin: 10px 0;
+}
+
+.picture-of-an-animal img {
+  width: 100%;
+}
+
+div {
+  padding: 10px;
+}
+
+.description {
+  border: 1px solid black;
+}
+
+.common-features span {
+  font-weight: bold;
+}
+
+.interesting-fact {
+  font-style: italic;
+}
