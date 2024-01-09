@@ -1,0 +1,81 @@
+.sumustekas {
+  width: 450px;
+  margin: auto;
+  text-align: center;
+}
+
+.bandele-top {
+  height: 70px;
+  width: 80%;
+  margin: auto;
+  background-color: #e5b05a;
+  border-bottom: 7px solid #ce9e51;
+  border-radius: 100px 100px 20px 20px;
+}
+
+.suris {
+  height: 15px;
+  width: 85%;
+  margin: auto;
+  background-color: #f2c120;
+  border-bottom: 2px solid #d9ad1d;
+}
+
+.kecupas {
+  height: 25px;
+  width: 65%;
+  margin: auto;
+  background-color: #dd3710;
+  border-bottom: 2px solid #c6310e;
+}
+
+.svogunas {
+  width: 55%;
+  background-color: #a039bf;
+  border-top: 15px dotted #b361cc;
+  margin: auto;
+}
+
+.mesa {
+  height: 55px;
+  width: 65px;
+  background-color: #74380d;
+  border-radius: 50%;
+  display: inline-block;
+  margin: auto;
+  margin-bottom: -4px;
+}
+
+.agurkelis {
+  height: 25px;
+  width: 65%;
+  margin: auto;
+  background-color: #3ac67d;
+  border-bottom: 10px solid #2d9961;
+  border-radius: 0 0 150px 150px;
+}
+
+.mesos-paplotelis {
+  height: 30px;
+  width: 85%;
+  margin: auto;
+  background-color: #ad370b;
+  border: 1px solid #a3340a;
+  border-radius: 100px 100px 100px 100px;
+}
+
+.bandele-bottom {
+  height: 30px;
+  width: 80%;
+  margin: auto;
+  background-color: #e5b05a;
+  border-top: 7px solid #ce9e51;
+  border-radius: 35px 35px 100px 100px;
+}
+
+.lekste {
+  height: 15px;
+  margin: auto;
+  background-color: #656565;
+  border-radius: 0 0 100px 100px;
+}
