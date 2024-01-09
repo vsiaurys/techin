@@ -1,0 +1,27 @@
+.description p {
+  font-style: italic;
+  padding-top: 50px;
+}
+
+.round-picture img {
+  width: 20%;
+  border-radius: 50%;
+}
+
+article {
+  width: 600px;
+  margin: auto;
+  text-align: center;
+}
+
+.description {
+  box-shadow: 7px 7px 7px 7px lightgray, -10px -10px 10px lightgray,
+    5px -5px 5px 5px lightgray, -5px 5px 5px 5px lightgray;
+  margin-top: -60px;
+}
+
+.stars {
+  color: goldenrod;
+  padding: 20px;
+  letter-spacing: 20px;
+}
