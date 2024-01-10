@@ -1,0 +1,82 @@
+* {
+  margin: 0;
+}
+
+body {
+  background-color: bisque;
+}
+
+.row {
+  margin: 5px;
+  padding: 5px;
+}
+
+.btn {
+  padding: 5px;
+  margin: 5px;
+  text-decoration: none;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
+  border: 1px solid;
+  border-radius: 5px;
+}
+
+.btn--blue {
+  background-color: blue;
+  border-color: blue;
+}
+.btn--green {
+  background-color: green;
+  border-color: green;
+}
+.btn--lightblue {
+  background-color: lightblue;
+  border-color: lightblue;
+}
+.btn--chocolate {
+  background-color: chocolate;
+  border-color: chocolate;
+}
+.btn--red {
+  background-color: red;
+  border-color: red;
+}
+
+.btn--transparent {
+  background-clip: text;
+}
+
+.btn__text--transparent {
+  color: transparent;
+}
+
+.btn--square {
+  border-radius: 0;
+}
+
+.btn--round {
+  border-radius: 50px;
+}
+
+.btn--underlined {
+  border-bottom: 1px solid black;
+}
+
+.btn--gradient-blue {
+  background: linear-gradient(to bottom, rgb(169, 169, 226), blue);
+}
+.btn--gradient-green {
+  background: linear-gradient(to bottom, rgb(198, 235, 198), green);
+}
+.btn--gradient-lightblue {
+  background: linear-gradient(to bottom, rgb(215, 232, 238), lightblue);
+}
+
+.btn--gradient-chocolate {
+  background: linear-gradient(to bottom, rgb(242, 209, 185), chocolate);
+}
+.btn--gradient-red {
+  background: linear-gradient(to bottom, rgb(240, 191, 191), red);
+}
