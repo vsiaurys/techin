@@ -66,17 +66,22 @@ body {
 
 .btn--gradient-blue {
   background: linear-gradient(to bottom, rgb(169, 169, 226), blue);
+  border-color: rgb(169, 169, 226);
 }
 .btn--gradient-green {
   background: linear-gradient(to bottom, rgb(198, 235, 198), green);
+  border-color: rgb(198, 235, 198);
 }
 .btn--gradient-lightblue {
-  background: linear-gradient(to bottom, rgb(215, 232, 238), lightblue);
+  background: linear-gradient(to bottom, rgb(243, 248, 250), lightblue);
+  border-color: rgb(243, 248, 250);
 }
 
 .btn--gradient-chocolate {
   background: linear-gradient(to bottom, rgb(242, 209, 185), chocolate);
+  border-color: rgb(242, 209, 185);
 }
 .btn--gradient-red {
   background: linear-gradient(to bottom, rgb(240, 191, 191), red);
+  border: rgb(240, 191, 191);
 }
