@@ -1,0 +1,19 @@
+.box {
+  border: 1px solid black;
+  width: 200px;
+  height: 600px;
+  position: absolute;
+  top: 50px;
+}
+.div1 {
+  left: 50px;
+}
+.div2 {
+  left: 300px;
+}
+.div3 {
+  left: 550px;
+}
+.div4 {
+  left: 800px;
+}

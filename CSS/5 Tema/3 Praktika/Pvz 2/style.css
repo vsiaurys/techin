@@ -1,0 +1,42 @@
+.box {
+  border: 1px solid black;
+  width: 200px;
+  height: 600px;
+  position: absolute;
+}
+.div1 {
+  width: 400px;
+  height: 200px;
+  top: 80px;
+  left: 50px;
+  background-color: azure;
+  opacity: 0.7;
+  z-index: 10;
+}
+.div2 {
+  width: 400px;
+  height: 400px;
+  top: 150px;
+  left: 300px;
+  background-color: beige;
+  opacity: 0.7;
+  z-index: 20;
+}
+.div3 {
+  width: 700px;
+  height: 200px;
+  top: 400px;
+  left: 150px;
+  background-color: aquamarine;
+  opacity: 0.7;
+  z-index: 30;
+}
+.div4 {
+  width: 200px;
+  height: 600px;
+  top: 50px;
+  left: 750px;
+  background-color: aqua;
+  opacity: 0.7;
+  z-index: 40;
+}
