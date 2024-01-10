@@ -1,0 +1,11 @@
+div {
+  height: 300px;
+  width: 600px;
+  border: 1px solid black;
+
+  background-image: url("../IMG/mango.png"), url("../IMG/pizza.png"),
+    url("../IMG/forest.png");
+  background-size: 25%, 25%, cover;
+  background-repeat: no-repeat, no-repeat, no-repeat;
+  background-position: 10px 10px, bottom 10px right 10px, top;
+}
