@@ -1,7 +1,5 @@
 body {
   background-color: lightgray;
-}
-article {
   width: 90%;
   margin: 0 auto;
 }
@@ -32,7 +30,7 @@ article {
 }
 /*---------------------------------------------------*/
 .container {
-  height: 100px;
+  height: 150px;
   display: flex;
   flex-wrap: wrap;
 }
