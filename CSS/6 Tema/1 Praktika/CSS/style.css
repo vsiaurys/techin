@@ -1,0 +1,43 @@
+body {
+  background-color: lightgray;
+}
+article {
+  width: 90%;
+  margin: 0 auto;
+}
+.title,
+.separator,
+.footer {
+  background-color: rgb(37, 37, 89);
+  color: white;
+  text-align: center;
+  padding: 2em;
+}
+.box11 {
+  background-color: blueviolet;
+}
+.box12,
+.box21 {
+  background-color: pink;
+}
+.box13,
+.box22 {
+  background-color: chocolate;
+}
+.box14 {
+  background-color: white;
+}
+.box23 {
+  background-color: rgb(192, 231, 231);
+}
+/*---------------------------------------------------*/
+.container {
+  height: 100px;
+  display: flex;
+  flex-wrap: wrap;
+}
+.box {
+  flex-direction: row;
+  flex-grow: 1;
+  flex-basis: 200px;
+}
