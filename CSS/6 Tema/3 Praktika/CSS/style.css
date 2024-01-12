@@ -1,0 +1,48 @@
+body {
+  background-color: lightgray;
+  margin: 0;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.left-card {
+  flex-grow: 2;
+}
+
+.right-card {
+  flex-grow: 1;
+}
+
+.left-card,
+.right-card {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 10px;
+  flex-basis: 300px;
+}
+
+.left-card__image {
+  width: 100%;
+}
+
+.right-card__image {
+  float: left;
+  height: 150px;
+  margin-right: 5px;
+}
+
+.left-card__title,
+.right-card__title {
+  font-size: 1.5em;
+}
+
+.left-card__text,
+.right-card__text {
+  font-size: 1em;
+}
+
+.snippet {
+  padding: 20px;
+}
