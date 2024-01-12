@@ -1,0 +1,57 @@
+.container {
+  display: grid;
+  width: 60%;
+  margin: 0 auto;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 80px 200px 300px 80px;
+  grid-gap: 0.5em;
+  grid-template-areas:
+    "header header header"
+    "aside-1 article-1 article-1"
+    "article-2 article-2 aside-2"
+    "footer footer footer";
+}
+.header {
+  grid-area: header;
+}
+.aside-1 {
+  grid-area: aside-1;
+}
+.aside-2 {
+  grid-area: aside-2;
+}
+.article-1 {
+  grid-area: article-1;
+}
+.article-2 {
+  grid-area: article-2;
+}
+.footer {
+  grid-area: footer;
+}
+
+.item {
+  background-color: #a9e8dc;
+  border-radius: 5px;
+  padding: 25px;
+}
+
+.header,
+.footer {
+  color: white;
+  background-color: #02547d;
+  padding: 25px;
+}
+.courier {
+  font-family: "Courier New", Courier, monospace;
+}
+
+.article-1,
+.article-2 {
+  background-color: rgb(194, 194, 194);
+}
+.aside-1,
+.aside-2 {
+  border: 1px solid;
+  background-color: rgb(232, 232, 232);
+}
