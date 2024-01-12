@@ -1,0 +1,16 @@
+.container {
+  display: grid;
+  width: 80%;
+  margin: 0 auto;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 250px 250px;
+  grid-gap: 2rem;
+}
+
+.item {
+  background-color: cadetblue;
+  border-radius: 10px;
+  color: white;
+  font-size: 3em;
+  padding: 25px 0;
+}
