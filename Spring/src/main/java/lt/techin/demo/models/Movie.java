@@ -14,4 +14,24 @@ public class Movie {
         this.yearReleased = yearReleased;
         this.lengthMinutes = lengthMinutes;
     }
+
+    public long getId() {
+        return id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getDirector() {
+        return director;
+    }
+
+    public short getYearReleased() {
+        return yearReleased;
+    }
+
+    public short getLengthMinutes() {
+        return lengthMinutes;
+    }
 }
