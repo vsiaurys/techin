@@ -2,6 +2,7 @@ package lt.techin.demo.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -15,5 +16,10 @@ public class MovieController {
     @GetMapping("/movies")
     public ArrayList<String> getMovies() {
         return this.movies;
+    }
+
+    @GetMapping("/movies/{index}")
+    public String getMovie(@PathVariable int index) {
+        return this.movies.get(index);
     }
 }
