@@ -4,9 +4,7 @@ import lt.techin.demo.models.Actor;
 import lt.techin.demo.models.Movie;
 import lt.techin.demo.repositories.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -29,8 +27,12 @@ public class MovieController {
 
     @GetMapping("/movies/{id}")
     public Movie getMovie(@PathVariable long id) {
-
         return movieRepository.findById(id).orElseThrow();
+    }
 
+    @PostMapping("/movies")
+    public void insertMovie(@RequestBody Movie movie) {
+        this.movieRepository.save(movie);
     }
 }
+
