@@ -1,6 +1,7 @@
 package lt.techin.demo.models;
 
 public class Movie {
+@
     private long id;
     private String title;
     private String director;
