@@ -22,12 +22,12 @@ public class MovieController {
     }
 
     @GetMapping("/movies")
-    public ArrayList<Movie> getMovies() {
-        return this.movies;
+    public List<Movie> getMovies() {
+        return this.movieRepository.findAll();
     }
 
     @GetMapping("/movies/{index}")
     public Movie getMovie(@PathVariable int index) {
-        return this.movies.get(index);
+        return null;
     }
 }
