@@ -30,6 +30,10 @@ public class Actor {
         this.linkToPicture = linkToPicture;
     }
 
+    public Actor() {
+
+    }
+
     public long getId() {
         return id;
     }
