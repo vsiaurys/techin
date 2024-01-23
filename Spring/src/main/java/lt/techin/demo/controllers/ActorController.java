@@ -28,8 +28,8 @@ public class ActorController {
         return this.actorRepository.findAll();
     }
 
-    @GetMapping("/actors/{index}")
-    public Actor getActor(@PathVariable int index) {
-        return null;
+    @GetMapping("/actors/{id}")
+    public Actor getActor(@PathVariable long id) {
+        return actorRepository.findById(id).orElseThrow();
     }
 }

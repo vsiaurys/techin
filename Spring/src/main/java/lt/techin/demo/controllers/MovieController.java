@@ -1,5 +1,6 @@
 package lt.techin.demo.controllers;
 
+import lt.techin.demo.models.Actor;
 import lt.techin.demo.models.Movie;
 import lt.techin.demo.repositories.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +27,10 @@ public class MovieController {
         return this.movieRepository.findAll();
     }
 
-    @GetMapping("/movies/{index}")
-    public Movie getMovie(@PathVariable int index) {
-        return null;
+    @GetMapping("/movies/{id}")
+    public Movie getMovie(@PathVariable long id) {
+
+        return movieRepository.findById(id).orElseThrow();
+
     }
 }
