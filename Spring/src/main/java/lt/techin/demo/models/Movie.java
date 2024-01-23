@@ -12,12 +12,18 @@ public class Movie {
     private short yearReleased;
     private short lengthMinutes;
 
+    @Entity
+    @Table(name = "Movies")
     public Movie(long id, String title, String director, short yearReleased, short lengthMinutes) {
         this.id = id;
         this.title = title;
         this.director = director;
         this.yearReleased = yearReleased;
         this.lengthMinutes = lengthMinutes;
+    }
+
+    public Movie() {
+
     }
 
     public long getId() {
