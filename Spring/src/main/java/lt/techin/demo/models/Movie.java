@@ -2,8 +2,10 @@ package lt.techin.demo.models;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "Movies")
 public class Movie {
     @Id
     private long id;
@@ -12,8 +14,7 @@ public class Movie {
     private short yearReleased;
     private short lengthMinutes;
 
-    @Entity
-    @Table(name = "Movies")
+
     public Movie(long id, String title, String director, short yearReleased, short lengthMinutes) {
         this.id = id;
         this.title = title;
