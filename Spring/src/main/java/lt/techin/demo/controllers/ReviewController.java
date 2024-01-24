@@ -30,4 +30,19 @@ public class ReviewController {
     public void insertReview(@RequestBody Review review) {
         this.reviewRepository.save(review);
     }
+    @PutMapping("/reviews/{id}")
+    public Review updateReview(@RequestBody Review review, @PathVariable long id) {
+        if (this.reviewRepository.existsById(id)) {
+            Review reviewFromDb = this.reviewRepository.findById(id).orElseThrow();
+
+            reviewFromDb.setMovie(review.getMovie());
+            reviewFromDb.setReview(review.getReview());
+            reviewFromDb.setAuthor(review.getAuthor());
+            reviewFromDb.setRating(review.getRating());
+            reviewFromDb.setReviewDate(review.getReviewDate());
+
+            return this.reviewRepository.save(reviewFromDb);
+        }
+        return this.reviewRepository.save(review);
+    }
 }
