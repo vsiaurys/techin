@@ -4,9 +4,7 @@ import lt.techin.demo.models.Movie;
 import lt.techin.demo.models.Review;
 import lt.techin.demo.repositories.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,5 +26,8 @@ public class ReviewController {
         return reviewRepository.findById(id).orElseThrow();
     }
 
-
+    @PostMapping("/reviews")
+    public void insertReview(@RequestBody Review review) {
+        this.reviewRepository.save(review);
+    }
 }
