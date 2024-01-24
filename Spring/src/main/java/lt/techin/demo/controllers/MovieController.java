@@ -34,6 +34,7 @@ public class MovieController {
     public void insertMovie(@RequestBody Movie movie) {
         this.movieRepository.save(movie);
     }
+
     @PutMapping("/movies/{id}")
     public Movie updateMovie(@RequestBody Movie movie, @PathVariable long id) {
         if (this.movieRepository.existsById(id)) {
@@ -47,6 +48,11 @@ public class MovieController {
             return this.movieRepository.save(movieFromDb);
         }
         return this.movieRepository.save(movie);
+    }
+
+    @DeleteMapping("/movies/{id}")
+    public void deleteMovie(@PathVariable long id) {
+        this.movieRepository.deleteById(id);
     }
 }
 
