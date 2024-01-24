@@ -36,7 +36,8 @@ public class ActorController {
         this.actorRepository.save(actor);
     }
     @PutMapping("/actors/{id}")
-    public void updateMovie(@RequestBody Actor actor, @PathVariable long id) {
+    public Actor updateActor(@RequestBody Actor actor, @PathVariable long id) {
+        if (this.actorRepository.existsById(id)) {
         Actor actorFromDb = this.actorRepository.findById(id).orElseThrow();
 
         actorFromDb.setName(actor.getName());
@@ -47,6 +48,8 @@ public class ActorController {
         actorFromDb.setSalaryPerDay(actor.getSalaryPerDay());
         actorFromDb.setLinkToPicture(actor.getLinkToPicture());
 
-        this.actorRepository.save(actorFromDb);
+        return this.actorRepository.save(actorFromDb);
+        }
+        return this.actorRepository.save(actor);
     }
 }
