@@ -35,21 +35,26 @@ public class ActorController {
     public void insertActor(@RequestBody Actor actor) {
         this.actorRepository.save(actor);
     }
+
     @PutMapping("/actors/{id}")
     public Actor updateActor(@RequestBody Actor actor, @PathVariable long id) {
         if (this.actorRepository.existsById(id)) {
-        Actor actorFromDb = this.actorRepository.findById(id).orElseThrow();
+            Actor actorFromDb = this.actorRepository.findById(id).orElseThrow();
 
-        actorFromDb.setName(actor.getName());
-        actorFromDb.setSex(actor.getSex());
-        actorFromDb.setDateOfBirth(actor.getDateOfBirth());
-        actorFromDb.setHeight(actor.getHeight());
-        actorFromDb.setRating(actor.getRating());
-        actorFromDb.setSalaryPerDay(actor.getSalaryPerDay());
-        actorFromDb.setLinkToPicture(actor.getLinkToPicture());
+            actorFromDb.setName(actor.getName());
+            actorFromDb.setSex(actor.getSex());
+            actorFromDb.setDateOfBirth(actor.getDateOfBirth());
+            actorFromDb.setHeight(actor.getHeight());
+            actorFromDb.setRating(actor.getRating());
+            actorFromDb.setSalaryPerDay(actor.getSalaryPerDay());
+            actorFromDb.setLinkToPicture(actor.getLinkToPicture());
 
-        return this.actorRepository.save(actorFromDb);
+            return this.actorRepository.save(actorFromDb);
         }
         return this.actorRepository.save(actor);
+    }
+    @DeleteMapping("/actors/{id}")
+    public void deleteActor(@PathVariable long id) {
+        this.actorRepository.deleteById(id);
     }
 }
