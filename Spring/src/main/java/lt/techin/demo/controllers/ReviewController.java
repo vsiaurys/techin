@@ -45,4 +45,9 @@ public class ReviewController {
         }
         return this.reviewRepository.save(review);
     }
+
+    @DeleteMapping("/reviews/{id}")
+    public void deleteReview(@PathVariable long id) {
+        this.reviewRepository.deleteById(id);
+    }
 }
