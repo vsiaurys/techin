@@ -35,15 +35,18 @@ public class MovieController {
         this.movieRepository.save(movie);
     }
     @PutMapping("/movies/{id}")
-    public void updateMovie(@RequestBody Movie movie, @PathVariable long id) {
-        Movie movieFromDb = this.movieRepository.findById(id).orElseThrow();
+    public Movie updateMovie(@RequestBody Movie movie, @PathVariable long id) {
+        if (this.movieRepository.existsById(id)) {
+            Movie movieFromDb = this.movieRepository.findById(id).orElseThrow();
 
-        movieFromDb.setTitle(movie.getTitle());
-        movieFromDb.setDirector(movie.getDirector());
-        movieFromDb.setYearReleased(movie.getYearReleased());
-        movieFromDb.setLengthMinutes(movie.getLengthMinutes());
+            movieFromDb.setTitle(movie.getTitle());
+            movieFromDb.setDirector(movie.getDirector());
+            movieFromDb.setYearReleased(movie.getYearReleased());
+            movieFromDb.setLengthMinutes(movie.getLengthMinutes());
 
-        this.movieRepository.save(movieFromDb);
+            return this.movieRepository.save(movieFromDb);
+        }
+        return this.movieRepository.save(movie);
     }
 }
 
