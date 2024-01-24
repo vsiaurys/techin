@@ -10,15 +10,17 @@ public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private long movieId;
+    @ManyToOne
+    @JoinColumn(name="Movie_id")
+    private Movie movie;
     private String review;
     private String author;
     private short rating;
     private Date reviewDate;
 
-    public Review(long id, long movieId, String review, String author, short rating, Date reviewDate) {
+    public Review(long id, Movie movie, String review, String author, short rating, Date reviewDate) {
         this.id = id;
-        this.movieId = movieId;
+        this.movie = movie;
         this.review = review;
         this.author = author;
         this.rating = rating;
@@ -32,8 +34,8 @@ public class Review {
         return id;
     }
 
-    public long getMovieId() {
-        return movieId;
+    public Movie getMovie() {
+        return movie;
     }
 
     public String getReview() {
@@ -52,8 +54,8 @@ public class Review {
         return reviewDate;
     }
 
-    public void setMovieId(long movieId) {
-        this.movieId = movieId;
+    public void setMovie(Movie movie) {
+        this.movie = movie;
     }
 
     public void setReview(String review) {
