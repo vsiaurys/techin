@@ -45,4 +45,20 @@ public class Movie {
     public short getLengthMinutes() {
         return lengthMinutes;
     }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setDirector(String director) {
+        this.director = director;
+    }
+
+    public void setYearReleased(short yearReleased) {
+        this.yearReleased = yearReleased;
+    }
+
+    public void setLengthMinutes(short lengthMinutes) {
+        this.lengthMinutes = lengthMinutes;
+    }
 }
