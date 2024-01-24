@@ -27,4 +27,48 @@ public class Review {
 
     public Review() {
     }
+
+    public long getId() {
+        return id;
+    }
+
+    public long getMovieId() {
+        return movieId;
+    }
+
+    public String getReview() {
+        return review;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public short getRating() {
+        return rating;
+    }
+
+    public Date getReviewDate() {
+        return reviewDate;
+    }
+
+    public void setMovieId(long movieId) {
+        this.movieId = movieId;
+    }
+
+    public void setReview(String review) {
+        this.review = review;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public void setRating(short rating) {
+        this.rating = rating;
+    }
+
+    public void setReviewDate(Date reviewDate) {
+        this.reviewDate = reviewDate;
+    }
 }
