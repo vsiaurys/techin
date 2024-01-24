@@ -35,4 +35,18 @@ public class ActorController {
     public void insertActor(@RequestBody Actor actor) {
         this.actorRepository.save(actor);
     }
+    @PutMapping("/actors/{id}")
+    public void updateMovie(@RequestBody Actor actor, @PathVariable long id) {
+        Actor actorFromDb = this.actorRepository.findById(id).orElseThrow();
+
+        actorFromDb.setName(actor.getName());
+        actorFromDb.setSex(actor.getSex());
+        actorFromDb.setDateOfBirth(actor.getDateOfBirth());
+        actorFromDb.setHeight(actor.getHeight());
+        actorFromDb.setRating(actor.getRating());
+        actorFromDb.setSalaryPerDay(actor.getSalaryPerDay());
+        actorFromDb.setLinkToPicture(actor.getLinkToPicture());
+
+        this.actorRepository.save(actorFromDb);
+    }
 }
