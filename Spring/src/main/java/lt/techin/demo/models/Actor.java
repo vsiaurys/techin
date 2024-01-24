@@ -64,6 +64,34 @@ public class Actor {
     public String getLinkToPicture() {
         return linkToPicture;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSex(char sex) {
+        this.sex = sex;
+    }
+
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public void setHeight(short height) {
+        this.height = height;
+    }
+
+    public void setRating(float rating) {
+        this.rating = rating;
+    }
+
+    public void setSalaryPerDay(double salaryPerDay) {
+        this.salaryPerDay = salaryPerDay;
+    }
+
+    public void setLinkToPicture(String linkToPicture) {
+        this.linkToPicture = linkToPicture;
+    }
 }
 
 
