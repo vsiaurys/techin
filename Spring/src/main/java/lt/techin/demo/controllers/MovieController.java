@@ -47,10 +47,10 @@ public class MovieController {
         }
         return this.movieService.saveMovie(movie);
     }
-//
-//    @DeleteMapping("/movies/{id}")
-//    public void deleteMovie(@PathVariable long id) {
-//        this.movieRepository.deleteById(id);
-//    }
+
+    @DeleteMapping("/movies/{id}")
+    public void deleteMovie(@PathVariable long id) {
+        this.movieService.deleteMovieById(id);
+    }
 }
 

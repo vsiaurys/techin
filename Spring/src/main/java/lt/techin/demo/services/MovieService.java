@@ -4,6 +4,7 @@ import lt.techin.demo.models.Movie;
 import lt.techin.demo.repositories.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 @Service
@@ -28,6 +29,8 @@ public class MovieService {
     public boolean existsMovieById(long id){
         return this.movieRepository.existsById(id);
     }
-
+    public void deleteMovieById(@PathVariable long id) {
+        this.movieRepository.deleteById(id);
+    }
 
 }
