@@ -3,7 +3,7 @@ package lt.techin.demo.models;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "BoxOffice")
+@Table(name = "Boxoffice")
 public class BoxOffice {
     @Id
     private long id;
