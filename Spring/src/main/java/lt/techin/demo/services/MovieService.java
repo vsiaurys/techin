@@ -24,4 +24,10 @@ public class MovieService {
     public Movie saveMovie (Movie movie) {
         return this.movieRepository.save(movie);
     }
+
+    public boolean existsMovieById(long id){
+        return this.movieRepository.existsById(id);
+    }
+
+
 }

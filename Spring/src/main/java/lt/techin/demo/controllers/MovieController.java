@@ -32,20 +32,21 @@ public class MovieController {
         return this.movieService.saveMovie(movie);
     }
 
-//    @PutMapping("/movies/{id}")
-//    public Movie updateMovie(@RequestBody Movie movie, @PathVariable long id) {
-//        if (this.movieRepository.existsById(id)) {
-//            Movie movieFromDb = this.movieRepository.findById(id).orElseThrow();
-//
-//            movieFromDb.setTitle(movie.getTitle());
-//            movieFromDb.setDirector(movie.getDirector());
-//            movieFromDb.setYearReleased(movie.getYearReleased());
-//            movieFromDb.setLengthMinutes(movie.getLengthMinutes());
-//
-//            return this.movieRepository.save(movieFromDb);
-//        }
-//        return this.movieRepository.save(movie);
-//    }
+    @PutMapping("/movies/{id}")
+    public Movie updateMovie(@RequestBody Movie movie, @PathVariable long id) {
+
+        if (this.movieService.existsMovieById(id)) {
+            Movie movieFromDb = this.movieService.findMovieById(id);
+
+            movieFromDb.setTitle(movie.getTitle());
+            movieFromDb.setDirector(movie.getDirector());
+            movieFromDb.setYearReleased(movie.getYearReleased());
+            movieFromDb.setLengthMinutes(movie.getLengthMinutes());
+
+            return this.movieService.saveMovie(movieFromDb);
+        }
+        return this.movieService.saveMovie(movie);
+    }
 //
 //    @DeleteMapping("/movies/{id}")
 //    public void deleteMovie(@PathVariable long id) {
