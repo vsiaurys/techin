@@ -3,17 +3,20 @@ package lt.techin.demo.models;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "Boxoffice")
+@Table(name = "BoxOffice")
 public class BoxOffice {
     @Id
+    private long id;
     @OneToOne
-    @JoinColumn(name="Movie_id")
+    @JoinColumn(name = "Movie_id")
+    @MapsId
     private Movie movie;
     private float rating;
     private long domesticSales;
     private long internationalSales;
 
-    public BoxOffice(Movie movie, float rating, long domesticSales, long internationalSales) {
+    public BoxOffice(long id, Movie movie, float rating, long domesticSales, long internationalSales) {
+        this.id = id;
         this.movie = movie;
         this.rating = rating;
         this.domesticSales = domesticSales;
@@ -21,6 +24,10 @@ public class BoxOffice {
     }
 
     public BoxOffice() {
+    }
+
+    public long getId() {
+        return id;
     }
 
     public Movie getMovie() {
