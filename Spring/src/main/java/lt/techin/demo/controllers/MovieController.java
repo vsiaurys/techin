@@ -21,12 +21,12 @@ public class MovieController {
     public List<Movie> getMovies() {
         return this.movieService.findAllMovies();
     }
-//
-//    @GetMapping("/movies/{id}")
-//    public Movie getMovie(@PathVariable long id) {
-//        return movieRepository.findById(id).orElseThrow();
-//    }
-//
+
+    @GetMapping("/movies/{id}")
+    public Movie getMovie(@PathVariable long id) {
+        return movieService.findMovieById(id);
+    }
+
 //    @PostMapping("/movies")
 //    public Movie insertMovie(@RequestBody Movie movie) {
 //        return this.movieRepository.save(movie);
