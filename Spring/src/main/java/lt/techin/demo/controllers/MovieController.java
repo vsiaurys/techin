@@ -53,4 +53,3 @@ public class MovieController {
         this.movieService.deleteMovieById(id);
     }
 }
-

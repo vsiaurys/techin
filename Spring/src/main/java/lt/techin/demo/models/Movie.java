@@ -14,8 +14,7 @@ public class Movie {
     private short lengthMinutes;
 
 
-    public Movie(long id, String title, String director, short yearReleased, short lengthMinutes) {
-        this.id = id;
+    public Movie(String title, String director, short yearReleased, short lengthMinutes) {
         this.title = title;
         this.director = director;
         this.yearReleased = yearReleased;
