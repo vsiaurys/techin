@@ -27,11 +27,11 @@ public class MovieController {
         return movieService.findMovieById(id);
     }
 
-//    @PostMapping("/movies")
-//    public Movie insertMovie(@RequestBody Movie movie) {
-//        return this.movieRepository.save(movie);
-//    }
-//
+    @PostMapping("/movies")
+    public Movie insertMovie(@RequestBody Movie movie) {
+        return this.movieService.saveMovie(movie);
+    }
+
 //    @PutMapping("/movies/{id}")
 //    public Movie updateMovie(@RequestBody Movie movie, @PathVariable long id) {
 //        if (this.movieRepository.existsById(id)) {
