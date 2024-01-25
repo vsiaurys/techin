@@ -1,6 +1,5 @@
 package lt.techin.demo.controllers;
 
-import lt.techin.demo.models.Movie;
 import lt.techin.demo.models.Review;
 import lt.techin.demo.repositories.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
