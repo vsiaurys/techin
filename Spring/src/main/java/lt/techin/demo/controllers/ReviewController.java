@@ -27,8 +27,8 @@ public class ReviewController {
     }
 
     @PostMapping("/reviews")
-    public void insertReview(@RequestBody Review review) {
-        this.reviewRepository.save(review);
+    public Review insertReview(@RequestBody Review review) {
+        return this.reviewRepository.save(review);
     }
     @PutMapping("/reviews/{id}")
     public Review updateReview(@RequestBody Review review, @PathVariable long id) {
