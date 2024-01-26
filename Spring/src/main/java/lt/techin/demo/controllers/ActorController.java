@@ -22,12 +22,12 @@ public class ActorController {
     public List<Actor> getActors() {
         return this.actorService.findAllActors();
     }
-//
-//    @GetMapping("/actors/{id}")
-//    public Actor getActor(@PathVariable long id) {
-//        return actorRepository.findById(id).orElseThrow();
-//    }
-//
+
+    @GetMapping("/actors/{id}")
+    public Actor getActor(@PathVariable long id) {
+        return actorService.findActorById(id);
+    }
+
 //    @PostMapping("/actors")
 //    public Actor insertActor(@RequestBody Actor actor) {
 //        return this.actorRepository.save(actor);

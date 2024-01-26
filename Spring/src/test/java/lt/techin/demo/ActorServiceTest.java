@@ -35,16 +35,16 @@ public class ActorServiceTest {
         then(actors).containsExactly(savedActor1, savedActor2);
     }
 
-//    @Test
-//    void findMovieById_saveMovieById_returned() {
-//        Movie savedMovie = this.movieRepository.save(new Movie("Madagascar",
-//                "Stephen Spielberg", (short) 2005, (short) 60));
-//        long id = savedMovie.getId();
-//
-//        Movie foundMovie = this.movieService.findMovieById(id);
-//
-//        then(foundMovie).isEqualTo(savedMovie);
-//    }
+    @Test
+    void findActorById_saveActorById_returned() {
+        Actor savedActor = this.actorRepository
+                .save(new Actor("Name 1", 'M', new Date(1950 - 01 - 01),
+                        (short) 180, (float) 8.2, 100000, "Link to picture 1"));
+
+        Actor foundActor = this.actorService.findActorById(savedActor.getId());
+
+        then(foundActor).isEqualTo(savedActor);
+    }
 //
 //    @Test
 //    void findMovieById_findNotExistent_throwError() {

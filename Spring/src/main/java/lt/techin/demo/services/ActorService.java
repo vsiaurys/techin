@@ -19,4 +19,20 @@ public class ActorService {
     public List<Actor> findAllActors() {
         return actorRepository.findAll();
     }
+
+    public Actor findActorById(long id) {
+        return actorRepository.findById(id).orElseThrow();
+    }
+
+//    public Movie saveMovie(Movie movie) {
+//        return this.movieRepository.save(movie);
+//    }
+//
+//    public boolean existsMovieById(long id) {
+//        return this.movieRepository.existsById(id);
+//    }
+//
+//    public void deleteMovieById(long id) {
+//        this.movieRepository.deleteById(id);
+//    }
 }
