@@ -37,7 +37,8 @@ class MovieServiceTest {
 
     @Test
     void findMovieById_saveMovieById_returned() {
-        Movie savedMovie = this.movieRepository.save(new Movie("Madagascar", "Stephen Spielberg", (short) 2005, (short) 60));
+        Movie savedMovie = this.movieRepository.save(new Movie("Madagascar",
+                "Stephen Spielberg", (short) 2005, (short) 60));
         long id = savedMovie.getId();
 
         Movie foundMovie = this.movieService.findMovieById(id);
@@ -60,5 +61,16 @@ class MovieServiceTest {
         Movie foundMovie = this.movieRepository.findById(savedMovie.getId()).orElse(null);
 
         then(foundMovie).isEqualTo(savedMovie);
+    }
+
+    @Test
+    void existsMovieById_checkIfExists_returnTrue() {
+        Movie savedMovie = this.movieRepository.save(new Movie("Madagascar",
+                "Stephen Spielberg", (short) 2005, (short) 60));
+
+        boolean existsMovie = this.movieService.existsMovieById(savedMovie.getId());
+
+        then(existsMovie).isTrue();
+
     }
 }
