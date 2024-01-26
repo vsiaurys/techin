@@ -31,7 +31,16 @@ class MovieServiceTest {
         Movie savedMovie2 = this.movieRepository.save(new Movie("HOme Alone",
                 "Stephen Spielberg", (short) 1999, (short) 120));
         List<Movie> movies = this.movieService.findAllMovies();
-
         then(movies).containsExactly(savedMovie1, savedMovie2);
+    }
+
+    @Test
+    void findMovieById_saveMovieById_returned() {
+        Movie savedMovie = this.movieRepository.save(new Movie("Madagascar",
+                "Stephen Spielberg", (short) 2005, (short) 60));
+        long id = savedMovie.getId();
+
+        Movie foundMovie = this.movieService.findMovieById(id);
+        then(foundMovie).isEqualTo(savedMovie);
     }
 }
