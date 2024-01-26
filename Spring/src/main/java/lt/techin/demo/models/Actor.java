@@ -18,8 +18,7 @@ public class Actor {
     private double salaryPerDay;
     private String linkToPicture;
 
-    public Actor(long id, String name, char sex, Date dateOfBirth, short height, float rating, double salaryPerDay, String linkToPicture) {
-        this.id = id;
+    public Actor(String name, char sex, Date dateOfBirth, short height, float rating, double salaryPerDay, String linkToPicture) {
         this.name = name;
         this.sex = sex;
         this.dateOfBirth = dateOfBirth;
