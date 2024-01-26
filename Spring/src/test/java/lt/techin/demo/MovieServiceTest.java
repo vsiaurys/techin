@@ -13,6 +13,7 @@ import org.springframework.test.context.ActiveProfiles;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.BDDAssertions.catchThrowable;
 import static org.assertj.core.api.BDDAssertions.then;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
@@ -36,11 +37,18 @@ class MovieServiceTest {
 
     @Test
     void findMovieById_saveMovieById_returned() {
-        Movie savedMovie = this.movieRepository.save(new Movie("Madagascar",
-                "Stephen Spielberg", (short) 2005, (short) 60));
+        Movie savedMovie = this.movieRepository.save(new Movie("Madagascar", "Stephen Spielberg", (short) 2005, (short) 60));
         long id = savedMovie.getId();
 
         Movie foundMovie = this.movieService.findMovieById(id);
+
         then(foundMovie).isEqualTo(savedMovie);
+    }
+
+    @Test
+    void findMovieById_findNotExistent_throwError() {
+        Throwable throwable = catchThrowable(() -> this.movieService.findMovieById(1));
+
+        then(throwable).isInstanceOf(NoSuchFieldException.class);
     }
 }
