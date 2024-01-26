@@ -24,15 +24,15 @@ public class ActorService {
         return actorRepository.findById(id).orElseThrow();
     }
 
-//    public Movie saveMovie(Movie movie) {
-//        return this.movieRepository.save(movie);
-//    }
-//
-//    public boolean existsMovieById(long id) {
-//        return this.movieRepository.existsById(id);
-//    }
-//
-//    public void deleteMovieById(long id) {
-//        this.movieRepository.deleteById(id);
-//    }
+    public Actor saveActor(Actor actor) {
+        return this.actorRepository.save(actor);
+    }
+
+    public boolean existsActorById(long id) {
+        return this.actorRepository.existsById(id);
+    }
+
+    public void deleteActorById(long id) {
+        this.actorRepository.deleteById(id);
+    }
 }

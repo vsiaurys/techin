@@ -28,31 +28,31 @@ public class ActorController {
         return actorService.findActorById(id);
     }
 
-//    @PostMapping("/actors")
-//    public Actor insertActor(@RequestBody Actor actor) {
-//        return this.actorRepository.save(actor);
-//    }
-//
-//    @PutMapping("/actors/{id}")
-//    public Actor updateActor(@RequestBody Actor actor, @PathVariable long id) {
-//        if (this.actorRepository.existsById(id)) {
-//            Actor actorFromDb = this.actorRepository.findById(id).orElseThrow();
-//
-//            actorFromDb.setName(actor.getName());
-//            actorFromDb.setSex(actor.getSex());
-//            actorFromDb.setDateOfBirth(actor.getDateOfBirth());
-//            actorFromDb.setHeight(actor.getHeight());
-//            actorFromDb.setRating(actor.getRating());
-//            actorFromDb.setSalaryPerDay(actor.getSalaryPerDay());
-//            actorFromDb.setLinkToPicture(actor.getLinkToPicture());
-//
-//            return this.actorRepository.save(actorFromDb);
-//        }
-//        return this.actorRepository.save(actor);
-//    }
-//
-//    @DeleteMapping("/actors/{id}")
-//    public void deleteActor(@PathVariable long id) {
-//        this.actorRepository.deleteById(id);
-//    }
+    @PostMapping("/actors")
+    public Actor insertActor(@RequestBody Actor actor) {
+        return this.actorService.saveActor(actor);
+    }
+
+    @PutMapping("/actors/{id}")
+    public Actor updateActor(@RequestBody Actor actor, @PathVariable long id) {
+        if (this.actorService.existsActorById(id)) {
+            Actor actorFromDb = this.actorService.findActorById(id);
+
+            actorFromDb.setName(actor.getName());
+            actorFromDb.setSex(actor.getSex());
+            actorFromDb.setDateOfBirth(actor.getDateOfBirth());
+            actorFromDb.setHeight(actor.getHeight());
+            actorFromDb.setRating(actor.getRating());
+            actorFromDb.setSalaryPerDay(actor.getSalaryPerDay());
+            actorFromDb.setLinkToPicture(actor.getLinkToPicture());
+
+            return this.actorService.saveActor(actorFromDb);
+        }
+        return this.actorService.saveActor(actor);
+    }
+
+    @DeleteMapping("/actors/{id}")
+    public void deleteActor(@PathVariable long id) {
+        this.actorService.deleteActorById(id);
+    }
 }
