@@ -4,15 +4,14 @@ import jakarta.transaction.Transactional;
 import lt.techin.demo.models.Movie;
 import lt.techin.demo.repositories.MovieRepository;
 import lt.techin.demo.services.MovieService;
-import org.assertj.core.api.BDDAssertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.BDDAssertions.catchThrowable;
 import static org.assertj.core.api.BDDAssertions.then;
 
@@ -48,9 +47,10 @@ class MovieServiceTest {
 
     @Test
     void findMovieById_findNotExistent_throwError() {
-        Throwable throwable = catchThrowable(() -> this.movieService.findMovieById(1));
+        Throwable throwable = catchThrowable(
+                () -> this.movieService.findMovieById(1));
 
-        then(throwable).isInstanceOf(NoSuchFieldException.class);
+        then(throwable).isInstanceOf(NoSuchElementException.class);
     }
 
     @Test
@@ -71,6 +71,15 @@ class MovieServiceTest {
         boolean existsMovie = this.movieService.existsMovieById(savedMovie.getId());
 
         then(existsMovie).isTrue();
+    }
 
+    @Test
+    void deleteMovieById_checkIfDeletes_returnFalse() {
+        Movie savedMovie = this.movieRepository.save(new Movie("Madagascar",
+                "Stephen Spielberg", (short) 2005, (short) 60));
+
+        this.movieService.deleteMovieById(savedMovie.getId());
+
+        then(this.movieRepository.existsById(savedMovie.getId())).isFalse();
     }
 }
