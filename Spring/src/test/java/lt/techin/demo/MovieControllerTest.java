@@ -123,4 +123,37 @@ public class MovieControllerTest {
                 }
         ));
     }
+
+    @Test
+    void updateMovie_whenNoMovieFound_addNewOne() throws Exception {
+        // given
+        Movie newMovie = new Movie("New Movie", "Director 3",
+                (short) 2023, (short) 123);
+
+        given(this.movieService.existsMovieById(anyLong())).willReturn(false);
+        given(this.movieService.saveMovie(any(Movie.class)))
+                .willReturn(newMovie);
+        //when
+        mockMvc.perform(put("/movies/{id}", 11)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(new ObjectMapper().writeValueAsString(newMovie))
+                        .accept(MediaType.APPLICATION_JSON))
+
+                //then
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.title").value("New Movie"))
+                .andExpect(jsonPath("$.director").value("Director 3"))
+                .andExpect(jsonPath("$.yearReleased").value(2023))
+                .andExpect(jsonPath("$.lengthMinutes").value(123));
+
+        verify(this.movieService).existsMovieById(11L);
+        verify(this.movieService, never()).findMovieById(anyLong());
+
+        verify(this.movieService).saveMovie(
+                argThat(persistedMovie -> persistedMovie.getTitle()
+                        .equals("New Movie")));
+
+    }
+
+
 }
