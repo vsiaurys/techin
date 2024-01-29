@@ -80,4 +80,38 @@ public class MovieControllerTest {
 
         verify(this.movieService).saveMovie(any(Movie.class));
     }
+
+    @Test
+    void updateMovie_whenUpdateFields_thenReturn() throws Exception {
+
+        // given
+        Movie existingMovie = new Movie("Existing Movie", "Director 1",
+                (short) 2013, (short) 105);
+        Movie updatedMovie = new Movie("Updated Movie", "Director 2",
+                (short) 2023, (short) 90);
+
+        given(this.movieService.existsMovieById(anyLong())).willReturn(true);
+        given(this.movieService.findMovieById(anyLong()))
+                .willReturn(existingMovie);
+        given(this.movieService.saveMovie(any(Movie.class)))
+                .willReturn(updatedMovie);
+
+
+        //when
+        mockMvc.perform(put("/movies/{id}", 1)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(new ObjectMapper().writeValueAsString(updatedMovie))
+                        .accept(MediaType.APPLICATION_JSON))
+
+                //then
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.title").value("Updated Movie"))
+                .andExpect(jsonPath("$.director").value("Director 2"))
+                .andExpect(jsonPath("$.yearReleased").value(2023))
+                .andExpect(jsonPath("$.lengthMinutes").value(90));
+
+        verify(this.movieService).existsMovieById(1L);
+        verify(this.movieService).findMovieById(1L);
+        verify(this.movieService).saveMovie(argThat(movie -> movie.getTitle().equals("Updated Movie")));
+    }
 }
