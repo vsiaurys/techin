@@ -1,5 +1,6 @@
 package lt.techin.demo;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.argThat;
@@ -112,6 +113,14 @@ public class MovieControllerTest {
 
         verify(this.movieService).existsMovieById(1L);
         verify(this.movieService).findMovieById(1L);
-        verify(this.movieService).saveMovie(argThat(movie -> movie.getTitle().equals("Updated Movie")));
+        verify(this.movieService).saveMovie(argThat(m -> {
+                    assertThat(m.getTitle()).isEqualTo("Updated Movie");
+                    assertThat(m.getDirector()).isEqualTo("Director 2");
+                    assertThat(m.getYearReleased()).isEqualTo((short) 2023);
+                    assertThat(m.getLengthMinutes()).isEqualTo((short) 90);
+
+                    return true;
+                }
+        ));
     }
 }
