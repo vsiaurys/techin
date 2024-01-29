@@ -152,8 +152,32 @@ public class MovieControllerTest {
         verify(this.movieService).saveMovie(
                 argThat(persistedMovie -> persistedMovie.getTitle()
                         .equals("New Movie")));
-
     }
 
+    @Test
+    void deleteMovie_deleteMovieById_returnNothing() throws Exception {
 
+        mockMvc.perform(delete("/movies/{id}", 11L))
+                .andExpect(status().isOk());
+
+        verify(this.movieService).deleteMovieById(11L);
+    }
+
+    @Test
+    void getMovieById_GetMovie_returnMovie() throws Exception {
+
+        Movie movie = new Movie("Delivery Man", "Ken Scott",
+                (short) 2013, (short) 105);
+
+        given(this.movieService.findMovieById(anyLong())).willReturn(movie);
+
+        mockMvc.perform(get("/movies/{id}", 2L))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.title").value("Delivery Man"))
+                .andExpect(jsonPath("$.director").value("Ken Scott"))
+                .andExpect(jsonPath("$.yearReleased").value(2013))
+                .andExpect(jsonPath("$.lengthMinutes").value(105));
+
+        verify(this.movieService).findMovieById(2L);
+    }
 }
