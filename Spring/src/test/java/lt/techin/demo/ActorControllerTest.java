@@ -176,15 +176,15 @@ public class ActorControllerTest {
                         .equals("New Name")));
     }
 
-//    @Test
-//    void deleteMovie_deleteMovieById_returnNothing() throws Exception {
-//
-//        mockMvc.perform(delete("/movies/{id}", 11L))
-//                .andExpect(status().isOk());
-//
-//        verify(this.movieService).deleteMovieById(11L);
-//    }
-//
+    @Test
+    void deleteActor_deleteActorById_returnNothing() throws Exception {
+
+        mockMvc.perform(delete("/actors/{id}", 11L))
+                .andExpect(status().isOk());
+
+        verify(this.actorService).deleteActorById(11L);
+    }
+
 //    @Test
 //    void getMovieById_GetMovie_returnMovie() throws Exception {
 //
