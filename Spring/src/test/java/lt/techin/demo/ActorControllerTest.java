@@ -185,21 +185,24 @@ public class ActorControllerTest {
         verify(this.actorService).deleteActorById(11L);
     }
 
-//    @Test
-//    void getMovieById_GetMovie_returnMovie() throws Exception {
-//
-//        Movie movie = new Movie("Delivery Man", "Ken Scott",
-//                (short) 2013, (short) 105);
-//
-//        given(this.movieService.findMovieById(anyLong())).willReturn(movie);
-//
-//        mockMvc.perform(get("/movies/{id}", 2L))
-//                .andExpect(status().isOk())
-//                .andExpect(jsonPath("$.title").value("Delivery Man"))
-//                .andExpect(jsonPath("$.director").value("Ken Scott"))
-//                .andExpect(jsonPath("$.yearReleased").value(2013))
-//                .andExpect(jsonPath("$.lengthMinutes").value(105));
-//
-//        verify(this.movieService).findMovieById(2L);
-//    }
+    @Test
+    void getactorById_getActor_returnActor() throws Exception {
+
+        Actor actor = new Actor("Name 2", 'W', LocalDate.of(1965, 5, 3),
+                (short) 170, (float) 7.9, 50000, "Link to picture 2");
+
+        given(this.actorService.findActorById(anyLong())).willReturn(actor);
+
+        mockMvc.perform(get("/actors/{id}", 2L))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.name").value("Name 2"))
+                .andExpect(jsonPath("$.sex").value("W"))
+                .andExpect(jsonPath("$.dateOfBirth").value("1965-05-03"))
+                .andExpect(jsonPath("$.height").value(170))
+                .andExpect(jsonPath("$.rating").value(7.9))
+                .andExpect(jsonPath("$.salaryPerDay").value(50000))
+                .andExpect(jsonPath("$.linkToPicture").value("Link to picture 2"));
+
+        verify(this.actorService).findActorById(2L);
+    }
 }
