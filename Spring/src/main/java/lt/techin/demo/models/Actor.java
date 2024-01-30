@@ -2,7 +2,7 @@ package lt.techin.demo.models;
 
 import jakarta.persistence.*;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "Actors")
@@ -12,13 +12,13 @@ public class Actor {
     private long id;
     private String name;
     private char sex;
-    private Date dateOfBirth;
+    private LocalDate dateOfBirth;
     private short height;
     private float rating;
     private double salaryPerDay;
     private String linkToPicture;
 
-    public Actor(String name, char sex, Date dateOfBirth, short height, float rating, double salaryPerDay, String linkToPicture) {
+    public Actor(String name, char sex, LocalDate dateOfBirth, short height, float rating, double salaryPerDay, String linkToPicture) {
         this.name = name;
         this.sex = sex;
         this.dateOfBirth = dateOfBirth;
@@ -44,7 +44,7 @@ public class Actor {
         return sex;
     }
 
-    public Date getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
@@ -72,7 +72,7 @@ public class Actor {
         this.sex = sex;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 

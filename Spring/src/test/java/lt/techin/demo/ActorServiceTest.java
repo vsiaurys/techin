@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -28,10 +28,10 @@ public class ActorServiceTest {
     @Test
     void findAllActors_saveActors_returned() {
         Actor savedActor1 = this.actorRepository
-                .save(new Actor("Name 1", 'M', new Date(1950 - 01 - 01),
+                .save(new Actor("Name 1", 'M', LocalDate.of(1950, 1, 1),
                         (short) 180, (float) 8.2, 100000, "Link to picture 1"));
         Actor savedActor2 = this.actorRepository
-                .save(new Actor("Name 2", 'W', new Date(1965 - 05 - 03),
+                .save(new Actor("Name 2", 'W', LocalDate.of(1965, 5, 3),
                         (short) 170, (float) 7.9, 50000, "Link to picture 2"));
         List<Actor> actors = this.actorService.findAllActors();
         then(actors).containsExactly(savedActor1, savedActor2);
@@ -40,7 +40,7 @@ public class ActorServiceTest {
     @Test
     void findActorById_saveActorById_returned() {
         Actor savedActor = this.actorRepository
-                .save(new Actor("Name 1", 'M', new Date(1950 - 01 - 01),
+                .save(new Actor("Name 1", 'M', LocalDate.of(1950, 1, 1),
                         (short) 180, (float) 8.2, 100000, "Link to picture 1"));
 
         Actor foundActor = this.actorService.findActorById(savedActor.getId());
@@ -59,7 +59,7 @@ public class ActorServiceTest {
     @Test
     void saveActor_saveNewActor_returnSavedActor() {
         Actor savedActor = this.actorRepository
-                .save(new Actor("Name 2", 'W', new Date(1965 - 05 - 03),
+                .save(new Actor("Name 2", 'W', LocalDate.of(1965, 5, 3),
                         (short) 170, (float) 7.9, 50000, "Link to picture 2"));
 
         Actor foundActor = this.actorRepository.findById(savedActor.getId()).orElse(null);
@@ -70,7 +70,7 @@ public class ActorServiceTest {
     @Test
     void existsActorById_checkIfExists_returnTrue() {
         Actor savedActor = this.actorRepository
-                .save(new Actor("Name 1", 'M', new Date(1950 - 01 - 01),
+                .save(new Actor("Name 1", 'M', LocalDate.of(1950, 1, 1),
                         (short) 180, (float) 8.2, 100000, "Link to picture 1"));
 
         boolean existsActor = this.actorService.existsActorById(savedActor.getId());
@@ -81,7 +81,7 @@ public class ActorServiceTest {
     @Test
     void deleteActorById_checkIfDeletes_returnFalse() {
         Actor savedActor = this.actorRepository
-                .save(new Actor("Name 2", 'W', new Date(1965 - 05 - 03),
+                .save(new Actor("Name 2", 'W', LocalDate.of(1965, 5, 3),
                         (short) 170, (float) 7.9, 50000, "Link to picture 2"));
 
         this.actorService.deleteActorById(savedActor.getId());
