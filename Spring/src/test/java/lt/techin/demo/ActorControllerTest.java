@@ -1,5 +1,6 @@
 package lt.techin.demo;
 
+import lt.techin.demo.controllers.ActorController;
 import lt.techin.demo.models.Actor;
 import lt.techin.demo.services.ActorService;
 import org.junit.jupiter.api.Test;
@@ -17,7 +18,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(controllers = ActorControllerTest.class)
+@WebMvcTest(controllers = ActorController.class)
 public class ActorControllerTest {
 
     @Autowired
@@ -37,16 +38,16 @@ public class ActorControllerTest {
         mockMvc.perform(get("/actors"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].name").value("Name 1"))
-                .andExpect(jsonPath("$[0].sex").value('M'))
-                .andExpect(jsonPath("$[0].dateOfBirth").value("1950 - 01 - 01"))
+                .andExpect(jsonPath("$[0].sex").value("M"))
+                .andExpect(jsonPath("$[0].dateOfBirth").value("1950-01-01"))
                 .andExpect(jsonPath("$[0].height").value(180))
                 .andExpect(jsonPath("$[0].rating").value(8.2))
                 .andExpect(jsonPath("$[0].salaryPerDay").value(100000))
                 .andExpect(jsonPath("$[0].linkToPicture").value("Link to picture 1"))
 
                 .andExpect(jsonPath("$[1].name").value("Name 2"))
-                .andExpect(jsonPath("$[1].sex").value('W'))
-                .andExpect(jsonPath("$[1].dateOfBirth").value("1965 - 05 - 03"))
+                .andExpect(jsonPath("$[1].sex").value("W"))
+                .andExpect(jsonPath("$[1].dateOfBirth").value("1965-05-03"))
                 .andExpect(jsonPath("$[1].height").value(170))
                 .andExpect(jsonPath("$[1].rating").value(7.9))
                 .andExpect(jsonPath("$[1].salaryPerDay").value(50000))
@@ -57,27 +58,30 @@ public class ActorControllerTest {
     }
 
 //    @Test
-//    void insertMovie_whenSaveMovie_thenReturnIt() throws Exception {
+//    void insertActor_whenSaveActor_thenReturnIt() throws Exception {
 ////      given
-//        Movie movie = new Movie("Delivery Man", "Ken Scott",
-//                (short) 2013, (short) 105);
-//        given(this.movieService.saveMovie(any(Movie.class))).willReturn(movie);
+//        Actor actor = new Actor("Name 2", 'W', LocalDate.of(1965, 5, 3),
+//                (short) 170, (float) 7.9, 50000, "Link to picture 2");
+//        given(this.actorService.saveActor(any(Actor.class))).willReturn(actor);
 //
 ////      when
-//        mockMvc.perform(post("/movies")
+//        mockMvc.perform(post("/actors")
 //                        .contentType(MediaType.APPLICATION_JSON)
 //                        .accept(MediaType.APPLICATION_JSON)
-//                        .content(new ObjectMapper().writeValueAsString(movie)))
+//                        .content(new ObjectMapper().writeValueAsString(actor)))
 ////      then
 //                .andExpect(status().isOk())
-//                .andExpect(jsonPath("$.title").value("Delivery Man"))
-//                .andExpect(jsonPath("$.director").value("Ken Scott"))
-//                .andExpect(jsonPath("$.yearReleased").value(2013))
-//                .andExpect(jsonPath("$.lengthMinutes").value(105));
+//                .andExpect(jsonPath("$.name").value("Name 2"))
+//                .andExpect(jsonPath("$.sex").value('W'))
+//                .andExpect(jsonPath("$.dateOfBirth").value("1965 - 05 - 03"))
+//                .andExpect(jsonPath("$.height").value(170))
+//                .andExpect(jsonPath("$.rating").value(7.9))
+//                .andExpect(jsonPath("$.salaryPerDay").value(50000))
+//                .andExpect(jsonPath("$.linkToPicture").value("Link to picture 2"));
 //
-//        verify(this.movieService).saveMovie(any(Movie.class));
+//        verify(this.actorService).saveActor(any(Actor.class));
 //    }
-//
+
 //    @Test
 //    void updateMovie_whenUpdateFields_thenReturn() throws Exception {
 //
