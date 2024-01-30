@@ -14,11 +14,11 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.time.LocalDate;
 import java.util.List;
 
-import static org.mockito.ArgumentMatchers.any;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -88,47 +88,57 @@ public class ActorControllerTest {
         verify(this.actorService).saveActor(any(Actor.class));
     }
 
-//    @Test
-//    void updateMovie_whenUpdateFields_thenReturn() throws Exception {
-//
-//        // given
-//        Movie existingMovie = new Movie("Existing Movie", "Director 1",
-//                (short) 2013, (short) 105);
-//        Movie updatedMovie = new Movie("Updated Movie", "Director 2",
-//                (short) 2023, (short) 90);
-//
-//        given(this.movieService.existsMovieById(anyLong())).willReturn(true);
-//        given(this.movieService.findMovieById(anyLong()))
-//                .willReturn(existingMovie);
-//        given(this.movieService.saveMovie(any(Movie.class)))
-//                .willReturn(updatedMovie);
-//
-//
-//        //when
-//        mockMvc.perform(put("/movies/{id}", 1)
-//                        .contentType(MediaType.APPLICATION_JSON)
-//                        .content(new ObjectMapper().writeValueAsString(updatedMovie))
-//                        .accept(MediaType.APPLICATION_JSON))
-//
-//                //then
-//                .andExpect(status().isOk())
-//                .andExpect(jsonPath("$.title").value("Updated Movie"))
-//                .andExpect(jsonPath("$.director").value("Director 2"))
-//                .andExpect(jsonPath("$.yearReleased").value(2023))
-//                .andExpect(jsonPath("$.lengthMinutes").value(90));
-//
-//        verify(this.movieService).existsMovieById(1L);
-//        verify(this.movieService).findMovieById(1L);
-//        verify(this.movieService).saveMovie(argThat(m -> {
-//                    assertThat(m.getTitle()).isEqualTo("Updated Movie");
-//                    assertThat(m.getDirector()).isEqualTo("Director 2");
-//                    assertThat(m.getYearReleased()).isEqualTo((short) 2023);
-//                    assertThat(m.getLengthMinutes()).isEqualTo((short) 90);
-//
-//                    return true;
-//                }
-//        ));
-//    }
+    @Test
+    void updateActor_whenUpdateFields_thenReturn() throws Exception {
+
+        // given
+        Actor existingActor = new Actor("Name 1", 'M', LocalDate.of(1950, 1, 1),
+                (short) 180, (float) 8.2, 100000, "Link to picture 1");
+        Actor updatedActor = new Actor("Name 2", 'W', LocalDate.of(1965, 5, 3),
+                (short) 170, (float) 7.9, 50000, "Link to picture 2");
+
+        given(this.actorService.existsActorById(anyLong())).willReturn(true);
+        given(this.actorService.findActorById(anyLong()))
+                .willReturn(existingActor);
+        given(this.actorService.saveActor(any(Actor.class)))
+                .willReturn(updatedActor);
+
+        ObjectMapper om = new ObjectMapper();
+        om.findAndRegisterModules();
+        //when
+        mockMvc.perform(put("/actors/{id}", 1)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(om.writeValueAsString(updatedActor))
+                        .accept(MediaType.APPLICATION_JSON))
+
+                //then
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.name").value("Name 2"))
+                .andExpect(jsonPath("$.sex").value("W"))
+                .andExpect(jsonPath("$.dateOfBirth").value("1965-05-03"))
+                .andExpect(jsonPath("$.height").value(170))
+                .andExpect(jsonPath("$.rating").value(7.9))
+                .andExpect(jsonPath("$.salaryPerDay").value(50000))
+                .andExpect(jsonPath("$.linkToPicture").value("Link to picture 2"));
+
+
+        verify(this.actorService).existsActorById(1L);
+        verify(this.actorService).findActorById(1L);
+        verify(this.actorService).saveActor(argThat(m -> {
+                    assertThat(m.getName()).isEqualTo("Name 2");
+                    assertThat(m.getSex()).isEqualTo('W');
+                    assertThat(m.getDateOfBirth()).isEqualTo("1965-05-03");
+                    assertThat(m.getHeight()).isEqualTo((short) 170);
+                    assertThat(m.getRating()).isEqualTo((float) 7.9);
+                    assertThat(m.getSalaryPerDay()).isEqualTo(50000);
+                    assertThat(m.getLinkToPicture()).isEqualTo("Link to picture 2");
+
+                    return true;
+                }
+        ));
+    }
+
+
 //
 //    @Test
 //    void updateMovie_whenNoMovieFound_addNewOne() throws Exception {
