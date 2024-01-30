@@ -1,5 +1,6 @@
 package lt.techin.demo;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lt.techin.demo.controllers.ActorController;
 import lt.techin.demo.models.Actor;
 import lt.techin.demo.services.ActorService;
@@ -7,14 +8,17 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDate;
 import java.util.List;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -57,30 +61,32 @@ public class ActorControllerTest {
 
     }
 
-//    @Test
-//    void insertActor_whenSaveActor_thenReturnIt() throws Exception {
-////      given
-//        Actor actor = new Actor("Name 2", 'W', LocalDate.of(1965, 5, 3),
-//                (short) 170, (float) 7.9, 50000, "Link to picture 2");
-//        given(this.actorService.saveActor(any(Actor.class))).willReturn(actor);
-//
-////      when
-//        mockMvc.perform(post("/actors")
-//                        .contentType(MediaType.APPLICATION_JSON)
-//                        .accept(MediaType.APPLICATION_JSON)
-//                        .content(new ObjectMapper().writeValueAsString(actor)))
-////      then
-//                .andExpect(status().isOk())
-//                .andExpect(jsonPath("$.name").value("Name 2"))
-//                .andExpect(jsonPath("$.sex").value('W'))
-//                .andExpect(jsonPath("$.dateOfBirth").value("1965 - 05 - 03"))
-//                .andExpect(jsonPath("$.height").value(170))
-//                .andExpect(jsonPath("$.rating").value(7.9))
-//                .andExpect(jsonPath("$.salaryPerDay").value(50000))
-//                .andExpect(jsonPath("$.linkToPicture").value("Link to picture 2"));
-//
-//        verify(this.actorService).saveActor(any(Actor.class));
-//    }
+    @Test
+    void insertActor_whenSaveActor_thenReturnIt() throws Exception {
+//      given
+        Actor actor = new Actor("Name 2", 'W', LocalDate.of(1965, 5, 3),
+                (short) 170, (float) 7.9, 50000, "Link to picture 2");
+        given(this.actorService.saveActor(any(Actor.class))).willReturn(actor);
+
+        ObjectMapper om = new ObjectMapper();
+        om.findAndRegisterModules();
+//      when
+        mockMvc.perform(post("/actors")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON)
+                        .content(om.writeValueAsString(actor)))
+//      then
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.name").value("Name 2"))
+                .andExpect(jsonPath("$.sex").value("W"))
+                .andExpect(jsonPath("$.dateOfBirth").value("1965-05-03"))
+                .andExpect(jsonPath("$.height").value(170))
+                .andExpect(jsonPath("$.rating").value(7.9))
+                .andExpect(jsonPath("$.salaryPerDay").value(50000))
+                .andExpect(jsonPath("$.linkToPicture").value("Link to picture 2"));
+
+        verify(this.actorService).saveActor(any(Actor.class));
+    }
 
 //    @Test
 //    void updateMovie_whenUpdateFields_thenReturn() throws Exception {
