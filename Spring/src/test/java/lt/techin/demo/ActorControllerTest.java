@@ -17,6 +17,7 @@ import java.util.List;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -139,37 +140,42 @@ public class ActorControllerTest {
     }
 
 
-//
-//    @Test
-//    void updateMovie_whenNoMovieFound_addNewOne() throws Exception {
-//        // given
-//        Movie newMovie = new Movie("New Movie", "Director 3",
-//                (short) 2023, (short) 123);
-//
-//        given(this.movieService.existsMovieById(anyLong())).willReturn(false);
-//        given(this.movieService.saveMovie(any(Movie.class)))
-//                .willReturn(newMovie);
-//        //when
-//        mockMvc.perform(put("/movies/{id}", 11)
-//                        .contentType(MediaType.APPLICATION_JSON)
-//                        .content(new ObjectMapper().writeValueAsString(newMovie))
-//                        .accept(MediaType.APPLICATION_JSON))
-//
-//                //then
-//                .andExpect(status().isOk())
-//                .andExpect(jsonPath("$.title").value("New Movie"))
-//                .andExpect(jsonPath("$.director").value("Director 3"))
-//                .andExpect(jsonPath("$.yearReleased").value(2023))
-//                .andExpect(jsonPath("$.lengthMinutes").value(123));
-//
-//        verify(this.movieService).existsMovieById(11L);
-//        verify(this.movieService, never()).findMovieById(anyLong());
-//
-//        verify(this.movieService).saveMovie(
-//                argThat(persistedMovie -> persistedMovie.getTitle()
-//                        .equals("New Movie")));
-//    }
-//
+    @Test
+    void updateActor_whenNoActorFound_addNewOne() throws Exception {
+        // given
+        Actor newActor = new Actor("New Name", 'W', LocalDate.of(1965, 5, 3),
+                (short) 170, (float) 7.9, 50000, "Link to picture 2");
+
+        given(this.actorService.existsActorById(anyLong())).willReturn(false);
+        given(this.actorService.saveActor(any(Actor.class)))
+                .willReturn(newActor);
+
+        ObjectMapper om = new ObjectMapper();
+        om.findAndRegisterModules();
+        //when
+        mockMvc.perform(put("/actors/{id}", 11)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(om.writeValueAsString(newActor))
+                        .accept(MediaType.APPLICATION_JSON))
+
+                //then
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.name").value("New Name"))
+                .andExpect(jsonPath("$.sex").value("W"))
+                .andExpect(jsonPath("$.dateOfBirth").value("1965-05-03"))
+                .andExpect(jsonPath("$.height").value(170))
+                .andExpect(jsonPath("$.rating").value(7.9))
+                .andExpect(jsonPath("$.salaryPerDay").value(50000))
+                .andExpect(jsonPath("$.linkToPicture").value("Link to picture 2"));
+
+        verify(this.actorService).existsActorById(11L);
+        verify(this.actorService, never()).findActorById(anyLong());
+
+        verify(this.actorService).saveActor(
+                argThat(persistedMovie -> persistedMovie.getName()
+                        .equals("New Name")));
+    }
+
 //    @Test
 //    void deleteMovie_deleteMovieById_returnNothing() throws Exception {
 //
