@@ -77,7 +77,7 @@ public class ActorControllerTest {
                         .accept(MediaType.APPLICATION_JSON)
                         .content(om.writeValueAsString(actor)))
 //      then
-                .andExpect(status().isCreated())
+                .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name").value("Name 2"))
                 .andExpect(jsonPath("$.sex").value("W"))
                 .andExpect(jsonPath("$.dateOfBirth").value("1965-05-03"))
@@ -113,7 +113,7 @@ public class ActorControllerTest {
                         .accept(MediaType.APPLICATION_JSON))
 
                 //then
-                .andExpect(status().isCreated())
+                .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name").value("Name 2"))
                 .andExpect(jsonPath("$.sex").value("W"))
                 .andExpect(jsonPath("$.dateOfBirth").value("1965-05-03"))
@@ -159,7 +159,7 @@ public class ActorControllerTest {
                         .accept(MediaType.APPLICATION_JSON))
 
                 //then
-                .andExpect(status().isCreated())
+                .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name").value("New Name"))
                 .andExpect(jsonPath("$.sex").value("W"))
                 .andExpect(jsonPath("$.dateOfBirth").value("1965-05-03"))
@@ -186,7 +186,7 @@ public class ActorControllerTest {
     }
 
     @Test
-    void getactorById_getActor_returnActor() throws Exception {
+    void getActorById_getActor_returnActor() throws Exception {
 
         Actor actor = new Actor("Name 2", 'W', LocalDate.of(1965, 5, 3),
                 (short) 170, (float) 7.9, 50000, "Link to picture 2");
