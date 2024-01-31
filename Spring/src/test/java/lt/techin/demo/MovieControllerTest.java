@@ -148,13 +148,21 @@ public class MovieControllerTest {
     }
 
     @Test
-    void deleteMovie_deleteMovieById_returnNothing() throws Exception {
-
+    void deleteMovie_whenMovieExists_return204() throws Exception {
+        given(this.movieService.existsMovieById(anyLong())).willReturn(true);
         mockMvc.perform(delete("/movies/{id}", 11L))
                 .andExpect(status().isNoContent());
 
         verify(this.movieService).deleteMovieById(11L);
     }
+
+    @Test
+    void deleteMovie_whenNoMovieFound_return404() throws Exception {
+        given(this.movieService.existsMovieById(anyLong())).willReturn(false);
+        mockMvc.perform(delete("/movies/{id}", 11L))
+                .andExpect(status().isNotFound());
+    }
+
 
     @Test
     void getMovieById_GetMovie_returnMovie() throws Exception {
