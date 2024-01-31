@@ -77,7 +77,7 @@ public class ActorControllerTest {
                         .accept(MediaType.APPLICATION_JSON)
                         .content(om.writeValueAsString(actor)))
 //      then
-                .andExpect(status().isOk())
+                .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.name").value("Name 2"))
                 .andExpect(jsonPath("$.sex").value("W"))
                 .andExpect(jsonPath("$.dateOfBirth").value("1965-05-03"))
@@ -113,7 +113,7 @@ public class ActorControllerTest {
                         .accept(MediaType.APPLICATION_JSON))
 
                 //then
-                .andExpect(status().isOk())
+                .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.name").value("Name 2"))
                 .andExpect(jsonPath("$.sex").value("W"))
                 .andExpect(jsonPath("$.dateOfBirth").value("1965-05-03"))
@@ -159,7 +159,7 @@ public class ActorControllerTest {
                         .accept(MediaType.APPLICATION_JSON))
 
                 //then
-                .andExpect(status().isOk())
+                .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.name").value("New Name"))
                 .andExpect(jsonPath("$.sex").value("W"))
                 .andExpect(jsonPath("$.dateOfBirth").value("1965-05-03"))

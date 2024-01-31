@@ -66,7 +66,7 @@ public class MovieControllerTest {
                         .accept(MediaType.APPLICATION_JSON)
                         .content(new ObjectMapper().writeValueAsString(movie)))
 //      then
-                .andExpect(status().isOk())
+                .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.title").value("Delivery Man"))
                 .andExpect(jsonPath("$.director").value("Ken Scott"))
                 .andExpect(jsonPath("$.yearReleased").value(2013))
@@ -98,7 +98,7 @@ public class MovieControllerTest {
                         .accept(MediaType.APPLICATION_JSON))
 
                 //then
-                .andExpect(status().isOk())
+                .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.title").value("Updated Movie"))
                 .andExpect(jsonPath("$.director").value("Director 2"))
                 .andExpect(jsonPath("$.yearReleased").value(2023))
@@ -133,7 +133,7 @@ public class MovieControllerTest {
                         .accept(MediaType.APPLICATION_JSON))
 
                 //then
-                .andExpect(status().isOk())
+                .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.title").value("New Movie"))
                 .andExpect(jsonPath("$.director").value("Director 3"))
                 .andExpect(jsonPath("$.yearReleased").value(2023))

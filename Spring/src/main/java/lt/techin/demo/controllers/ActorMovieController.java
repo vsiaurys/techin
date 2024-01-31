@@ -41,5 +41,4 @@ public class ActorMovieController {
     public ActorMovie saveActorMovie(@RequestBody ActorMovie actorMovie) {
         return this.actorMovieRepository.save(actorMovie);
     }
-
 }
