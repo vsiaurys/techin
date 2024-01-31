@@ -55,7 +55,7 @@ public class MovieController {
     }
 
     @DeleteMapping("/movies/{id}")
-    public ResponseEntity<Movie> deleteMovie(@PathVariable long id) {
+    public ResponseEntity<Void> deleteMovie(@PathVariable long id) {
 
         if (this.movieService.existsMovieById(id)) {
             this.movieService.deleteMovieById(id);

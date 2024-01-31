@@ -1,6 +1,8 @@
 package lt.techin.demo.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
+import org.antlr.v4.runtime.misc.NotNull;
 
 @Entity
 @Table(name = "Movies")
@@ -8,11 +10,17 @@ public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @NotNull
+    @Size(min = 1, message = "Title should be at least 1 characters long")
     private String title;
+    @NotNull
+    @Size(min = 1, message = "Director should be at least 1 characters long")
     private String director;
+    @NotNull
+    @Size(min = 1900, message = "The release year should be at least 1900")
     private short yearReleased;
+    @Size(min = 30, message = "The length of movie should be at least 30 minutes")
     private short lengthMinutes;
-
 
     public Movie(String title, String director, short yearReleased, short lengthMinutes) {
         this.title = title;
