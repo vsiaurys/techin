@@ -151,7 +151,7 @@ public class MovieControllerTest {
     void deleteMovie_deleteMovieById_returnNothing() throws Exception {
 
         mockMvc.perform(delete("/movies/{id}", 11L))
-                .andExpect(status().isOk());
+                .andExpect(status().isNoContent());
 
         verify(this.movieService).deleteMovieById(11L);
     }

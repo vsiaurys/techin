@@ -48,14 +48,20 @@ public class MovieController {
 
             return ResponseEntity.ok(this.movieService.saveMovie(movieFromDb));
         }
-
         Movie savedMovie = this.movieService.saveMovie(movie);
+
         return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}").buildAndExpand(savedMovie.getId()).toUri()).body(savedMovie);
     }
 
     @DeleteMapping("/movies/{id}")
-    public void deleteMovie(@PathVariable long id) {
-        this.movieService.deleteMovieById(id);
+    public ResponseEntity<Movie> deleteMovie(@PathVariable long id) {
+
+        if (this.movieService.existsMovieById(id)) {
+            this.movieService.deleteMovieById(id);
+
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.notFound().build();
     }
 }
