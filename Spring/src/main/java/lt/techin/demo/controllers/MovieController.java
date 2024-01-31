@@ -37,8 +37,7 @@ public class MovieController {
     }
 
     @PutMapping("/movies/{id}")
-    public Movie updateMovie(@RequestBody Movie movie, @PathVariable long id) {
-
+    public ResponseEntity<Movie> updateMovie(@RequestBody Movie movie, @PathVariable long id) {
         if (this.movieService.existsMovieById(id)) {
             Movie movieFromDb = this.movieService.findMovieById(id);
 
@@ -47,9 +46,12 @@ public class MovieController {
             movieFromDb.setYearReleased(movie.getYearReleased());
             movieFromDb.setLengthMinutes(movie.getLengthMinutes());
 
-            return this.movieService.saveMovie(movieFromDb);
+            return ResponseEntity.ok(this.movieService.saveMovie(movieFromDb));
         }
-        return this.movieService.saveMovie(movie);
+
+        Movie savedMovie = this.movieService.saveMovie(movie);
+        return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}").buildAndExpand(savedMovie.getId()).toUri()).body(savedMovie);
     }
 
     @DeleteMapping("/movies/{id}")

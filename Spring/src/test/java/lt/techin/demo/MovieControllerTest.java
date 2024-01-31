@@ -133,7 +133,7 @@ public class MovieControllerTest {
                         .accept(MediaType.APPLICATION_JSON))
 
                 //then
-                .andExpect(status().isOk())
+                .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.title").value("New Movie"))
                 .andExpect(jsonPath("$.director").value("Director 3"))
                 .andExpect(jsonPath("$.yearReleased").value(2023))
