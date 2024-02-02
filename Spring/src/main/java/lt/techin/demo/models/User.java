@@ -5,16 +5,16 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 @Entity
-@Table(name="Users")
+@Table(name = "Users")
 public class User {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY);
+    @GeneratedValue(strategy = GenerationType.IDENTITY);
     private long id;
     @NotNull
-    @Size(min=6, message = "Username should be at least 6 characters long")
+    @Size(min = 6, message = "Username should be at least 6 characters long")
     private String username;
     @NotNull
-    @Size(min=8, message = "Password must be at least 8 characters long")
+    @Size(min = 8, message = "Password must be at least 8 characters long")
     private String password;
 
     public User(String username, String password) {
