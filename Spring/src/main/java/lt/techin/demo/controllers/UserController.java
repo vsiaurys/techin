@@ -1,6 +1,5 @@
 package lt.techin.demo.controllers;
 
-import lt.techin.demo.models.Actor;
 import lt.techin.demo.models.User;
 import lt.techin.demo.services.UserService;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,7 +15,7 @@ public class UserController {
     }
 
     @PostMapping("/users")
-    public Actor createUser(@RequestBody User user) {
+    public User createUser(@RequestBody User user) {
         return this.userService.saveUser(user);
     }
 }
