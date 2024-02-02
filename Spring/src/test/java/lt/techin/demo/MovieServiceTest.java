@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -27,9 +28,9 @@ class MovieServiceTest {
     @Test
     void findAllMovies_saveMovies_returned() {
         Movie savedMovie1 = this.movieRepository.save(new Movie("Madagascar",
-                "Stephen Spielberg", (short) 2005, (short) 60));
+                "Stephen Spielberg", LocalDate.of(1976, 5, 3), (short) 60));
         Movie savedMovie2 = this.movieRepository.save(new Movie("Home Alone",
-                "Stephen Spielberg", (short) 1999, (short) 120));
+                "Stephen Spielberg", LocalDate.of(2000, 11, 19), (short) 120));
         List<Movie> movies = this.movieService.findAllMovies();
         then(movies).containsExactly(savedMovie1, savedMovie2);
     }
@@ -37,7 +38,7 @@ class MovieServiceTest {
     @Test
     void findMovieById_saveMovieById_returned() {
         Movie savedMovie = this.movieRepository.save(new Movie("Madagascar",
-                "Stephen Spielberg", (short) 2005, (short) 60));
+                "Stephen Spielberg", LocalDate.of(2000, 11, 19), (short) 60));
         long id = savedMovie.getId();
 
         Movie foundMovie = this.movieService.findMovieById(id);
@@ -56,7 +57,7 @@ class MovieServiceTest {
     @Test
     void saveMovie_saveNewMovie_returnSavedMovie() {
         Movie savedMovie = this.movieService.saveMovie(new Movie("HOme Alone",
-                "Stephen Spielberg", (short) 1999, (short) 120));
+                "Stephen Spielberg", LocalDate.of(2000, 11, 19), (short) 120));
 
         Movie foundMovie = this.movieRepository.findById(savedMovie.getId()).orElse(null);
 
@@ -66,7 +67,7 @@ class MovieServiceTest {
     @Test
     void existsMovieById_checkIfExists_returnTrue() {
         Movie savedMovie = this.movieRepository.save(new Movie("Madagascar",
-                "Stephen Spielberg", (short) 2005, (short) 60));
+                "Stephen Spielberg", LocalDate.of(2000, 11, 19), (short) 60));
 
         boolean existsMovie = this.movieService.existsMovieById(savedMovie.getId());
 
@@ -76,7 +77,7 @@ class MovieServiceTest {
     @Test
     void deleteMovieById_checkIfDeletes_returnFalse() {
         Movie savedMovie = this.movieRepository.save(new Movie("Madagascar",
-                "Stephen Spielberg", (short) 2005, (short) 60));
+                "Stephen Spielberg", LocalDate.of(2000, 11, 19), (short) 60));
 
         this.movieService.deleteMovieById(savedMovie.getId());
 

@@ -43,7 +43,7 @@ public class MovieController {
 
             movieFromDb.setTitle(movie.getTitle());
             movieFromDb.setDirector(movie.getDirector());
-            movieFromDb.setYearReleased(movie.getYearReleased());
+            movieFromDb.setDateReleased(movie.getDateReleased());
             movieFromDb.setLengthMinutes(movie.getLengthMinutes());
 
             return ResponseEntity.ok(this.movieService.saveMovie(movieFromDb));
