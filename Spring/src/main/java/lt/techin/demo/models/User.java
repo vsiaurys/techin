@@ -14,7 +14,7 @@ import java.util.List;
 public class User implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY);
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @NotNull
     @Size(min = 6, message = "Username should be at least 6 characters long")
@@ -50,24 +50,27 @@ public class User implements UserDetails {
     public void setPassword(String password) {
         this.password = password;
     }
+
     @Override
-    public boolean isAccountNonExpired(){
-        return true;
-    }
-    @Override
-    public boolean isAccountNonLocked(){
+    public boolean isAccountNonExpired() {
         return true;
     }
 
     @Override
-    public boolean isCredentialsNonExpired(){
+    public boolean isAccountNonLocked() {
         return true;
     }
 
     @Override
-    public boolean isEnabled(){
+    public boolean isCredentialsNonExpired() {
         return true;
     }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(() -> "ADMIN");
