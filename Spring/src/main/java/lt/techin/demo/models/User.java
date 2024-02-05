@@ -23,7 +23,7 @@ public class User implements UserDetails {
     @Size(min = 8, message = "Password must be at least 8 characters long")
     private String password;
     @NotNull
-    @Size(min = 4, message = "Role must be at least 4 characters long")
+    @Size(min = 4, message = "Role should be at least 4 characters long")
     private String role;
 
     public User(String username, String password, String role) {
@@ -85,6 +85,6 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(() -> "ADMIN");
+        return List.of(() -> this.getRole());
     }
 }
