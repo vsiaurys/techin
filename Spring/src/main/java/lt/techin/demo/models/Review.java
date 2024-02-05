@@ -16,15 +16,15 @@ public class Review {
     private String review;
     @ManyToOne
     @JoinColumn(name = "User_id")
-    private long userId;
+    private User user;
     private short rating;
     private Date reviewDate;
 
-    public Review(long id, Movie movie, String review, long userId, short rating, Date reviewDate) {
+    public Review(long id, Movie movie, String review, User user, short rating, Date reviewDate) {
         this.id = id;
         this.movie = movie;
         this.review = review;
-        this.userId = userId;
+        this.user = user;
         this.rating = rating;
         this.reviewDate = reviewDate;
     }
@@ -44,8 +44,8 @@ public class Review {
         return review;
     }
 
-    public long getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
     public short getRating() {
@@ -64,8 +64,8 @@ public class Review {
         this.review = review;
     }
 
-    public void setUserId(long userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public void setRating(short rating) {

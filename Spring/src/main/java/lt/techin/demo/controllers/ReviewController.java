@@ -38,7 +38,7 @@ public class ReviewController {
 
             reviewFromDb.setMovie(review.getMovie());
             reviewFromDb.setReview(review.getReview());
-            reviewFromDb.setUserId(review.getUserId());
+            reviewFromDb.setUser(review.getUser());
             reviewFromDb.setRating(review.getRating());
             reviewFromDb.setReviewDate(review.getReviewDate());
 
