@@ -18,6 +18,7 @@ public class User implements UserDetails {
     private long id;
     @NotNull
     @Size(min = 6, message = "Username should be at least 6 characters long")
+    @Column(unique = true)
     private String username;
     @NotNull
     @Size(min = 8, message = "Password must be at least 8 characters long")
