@@ -31,18 +31,13 @@ public class SecurityConfig {
                 .csrf(c -> c.disable())
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.POST, "/users").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/users")
-                        .hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/users").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET, "/movies").permitAll()
                         .requestMatchers(HttpMethod.GET, "/movies/{id}").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/movies")
-                        .hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.PUT, "/movies")
-                        .hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.PUT, "/movies/{id}")
-                        .hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.DELETE, "/movies/{id}")
-                        .hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/movies").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/movies").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/movies/{id}").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/movies/{id}").hasRole("ADMIN")
                         .anyRequest().authenticated())
                 .httpBasic(Customizer.withDefaults());
 
