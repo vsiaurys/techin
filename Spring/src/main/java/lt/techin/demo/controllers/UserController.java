@@ -30,6 +30,7 @@ public class UserController {
     @PostMapping("/users")
     public ResponseEntity<User> createUser(@RequestBody User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setRole("ROLE_USER");
         User savedUser = this.userService.saveUser(user);
 
         return ResponseEntity.created(ServletUriComponentsBuilder
