@@ -15,6 +15,7 @@ public class ReviewController {
     public ReviewController(ReviewRepository reviewRepository) {
         this.reviewRepository = reviewRepository;
     }
+
     @GetMapping("/reviews")
     public List<Review> getReviews() {
         return this.reviewRepository.findAll();
@@ -29,6 +30,7 @@ public class ReviewController {
     public Review insertReview(@RequestBody Review review) {
         return this.reviewRepository.save(review);
     }
+
     @PutMapping("/reviews/{id}")
     public Review updateReview(@RequestBody Review review, @PathVariable long id) {
         if (this.reviewRepository.existsById(id)) {
@@ -36,7 +38,7 @@ public class ReviewController {
 
             reviewFromDb.setMovie(review.getMovie());
             reviewFromDb.setReview(review.getReview());
-            reviewFromDb.setAuthor(review.getAuthor());
+            reviewFromDb.setUserId(review.getUserId());
             reviewFromDb.setRating(review.getRating());
             reviewFromDb.setReviewDate(review.getReviewDate());
 
