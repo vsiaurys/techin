@@ -181,6 +181,13 @@ public class MovieControllerTest {
                 .andExpect(status().isNotFound());
     }
 
+    @Test
+    @WithMockUser(roles = {"USER"})
+    void deleteMovie_whenNotAllowed_return403() throws Exception {
+        given(this.movieService.existsMovieById(anyLong())).willReturn(true);
+        mockMvc.perform(delete("/movies/{id}", 11L))
+                .andExpect(status().isForbidden());
+    }
 
     @Test
     void getMovieById_GetMovie_returnMovie() throws Exception {
