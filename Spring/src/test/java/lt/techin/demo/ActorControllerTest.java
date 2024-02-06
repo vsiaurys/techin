@@ -211,6 +211,28 @@ public class ActorControllerTest {
     }
 
     @Test
+    @WithMockUser
+    void updateActor_whenNotAllowed_return403() throws Exception {
+//  given
+        Actor actor = new Actor("Name 2", 'W', LocalDate.of(1965, 5, 3),
+                (short) 170, (float) 7.9, 50000, "Link to picture 2");
+        given(this.actorService.saveActor(any(Actor.class))).willReturn(actor);
+
+        ObjectMapper om = new ObjectMapper();
+        om.findAndRegisterModules();
+
+//  when
+        mockMvc.perform(put("/actors/{id}", 1L)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON)
+                        .content(om.writeValueAsString(actor)))
+//  then
+                .andExpect(status().isForbidden());
+
+        verify(this.actorService, times(0)).existsActorById(anyLong());
+    }
+
+    @Test
     @WithMockUser(roles = {"ADMIN"})
     void deleteActor_deleteActorById_returnNothing() throws Exception {
 //  given
