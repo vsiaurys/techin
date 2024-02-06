@@ -32,7 +32,7 @@ public class ReviewService {
 //        return this.movieRepository.existsById(id);
 //    }
 
-//    public void deleteReviewById(long id) {
-//        this.reviewRepository.deleteById(id);
-//    }
+    public void deleteReviewById(long id) {
+        this.reviewRepository.deleteById(id);
+    }
 }
