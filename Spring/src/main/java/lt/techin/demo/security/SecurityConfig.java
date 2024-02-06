@@ -43,6 +43,13 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.PUT, "/movies/{id}").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/movies/{id}").hasRole("ADMIN")
 
+                        .requestMatchers(HttpMethod.GET, "/actors").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/actors/{id}").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/actors").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/actors").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/actors/{id}").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/actors/{id}").hasRole("ADMIN")
+
                         .requestMatchers(HttpMethod.GET, "/reviews").permitAll()
                         .requestMatchers(HttpMethod.GET, "/reviews/{id}").permitAll()
                         .requestMatchers(HttpMethod.POST, "/reviews").authenticated()
