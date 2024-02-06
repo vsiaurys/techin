@@ -85,6 +85,26 @@ public class MovieControllerTest {
     }
 
     @Test
+    @WithMockUser(roles = {"USER"})
+    void insertMovie_whenNotAllowed_return403() throws Exception {
+        //given
+        Movie movie = new Movie("Delivery Man", "Ken Scott",
+                LocalDate.of(2000, 11, 19), (short) 105);
+        given(this.movieService.saveMovie(any(Movie.class))).willReturn(movie);
+
+        ObjectMapper om = new ObjectMapper();
+        om.findAndRegisterModules();
+
+        //when
+        mockMvc.perform(post("/movies")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON)
+                        .content(om.writeValueAsString(movie)))
+                //then
+                .andExpect(status().isForbidden());
+    }
+
+    @Test
     @WithMockUser(roles = {"ADMIN"})
     void updateMovie_whenUpdateFields_thenReturn() throws Exception {
 
