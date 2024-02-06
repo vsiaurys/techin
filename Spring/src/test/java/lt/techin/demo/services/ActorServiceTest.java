@@ -1,9 +1,8 @@
-package lt.techin.demo;
+package lt.techin.demo.services;
 
 import jakarta.transaction.Transactional;
 import lt.techin.demo.models.Actor;
 import lt.techin.demo.repositories.ActorRepository;
-import lt.techin.demo.services.ActorService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,7 +1,6 @@
-package lt.techin.demo;
+package lt.techin.demo.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lt.techin.demo.controllers.MovieController;
 import lt.techin.demo.models.Movie;
 import lt.techin.demo.security.SecurityConfig;
 import lt.techin.demo.services.MovieService;
