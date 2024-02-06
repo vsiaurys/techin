@@ -28,9 +28,9 @@ public class ReviewService {
         return this.reviewRepository.save(review);
     }
 
-//    public boolean existsMovieById(long id) {
-//        return this.movieRepository.existsById(id);
-//    }
+    public boolean existsReviewById(long id) {
+        return this.reviewRepository.existsById(id);
+    }
 
     public void deleteReviewById(long id) {
         this.reviewRepository.deleteById(id);
