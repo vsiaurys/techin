@@ -3,12 +3,15 @@ package lt.techin.demo;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lt.techin.demo.controllers.ActorController;
 import lt.techin.demo.models.Actor;
+import lt.techin.demo.security.SecurityConfig;
 import lt.techin.demo.services.ActorService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDate;
@@ -23,6 +26,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@Import(SecurityConfig.class)
 @WebMvcTest(controllers = ActorController.class)
 public class ActorControllerTest {
 
@@ -33,14 +37,17 @@ public class ActorControllerTest {
 
     @Test
     void getActors_whenFindAll_returnAll() throws Exception {
+//  given
         given(this.actorService.findAllActors()).willReturn(List.of(
                 new Actor("Name 1", 'M', LocalDate.of(1950, 1, 1),
                         (short) 180, (float) 8.2, 100000, "Link to picture 1"),
                 new Actor("Name 2", 'W', LocalDate.of(1965, 5, 3),
                         (short) 170, (float) 7.9, 50000, "Link to picture 2")));
 
-
+//  when
         mockMvc.perform(get("/actors"))
+
+//  then
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].name").value("Name 1"))
                 .andExpect(jsonPath("$[0].sex").value("M"))
@@ -63,20 +70,23 @@ public class ActorControllerTest {
     }
 
     @Test
+    @WithMockUser(roles = {"ADMIN"})
     void insertActor_whenSaveActor_thenReturnIt() throws Exception {
-//      given
+//  given
         Actor actor = new Actor("Name 2", 'W', LocalDate.of(1965, 5, 3),
                 (short) 170, (float) 7.9, 50000, "Link to picture 2");
         given(this.actorService.saveActor(any(Actor.class))).willReturn(actor);
 
         ObjectMapper om = new ObjectMapper();
         om.findAndRegisterModules();
-//      when
+
+//  when
         mockMvc.perform(post("/actors")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)
                         .content(om.writeValueAsString(actor)))
-//      then
+
+//  then
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name").value("Name 2"))
                 .andExpect(jsonPath("$.sex").value("W"))
@@ -90,9 +100,9 @@ public class ActorControllerTest {
     }
 
     @Test
+    @WithMockUser(roles = {"ADMIN"})
     void updateActor_whenUpdateFields_thenReturn() throws Exception {
-
-        // given
+//  given
         Actor existingActor = new Actor("Name 1", 'M', LocalDate.of(1950, 1, 1),
                 (short) 180, (float) 8.2, 100000, "Link to picture 1");
         Actor updatedActor = new Actor("Name 2", 'W', LocalDate.of(1965, 5, 3),
@@ -106,13 +116,14 @@ public class ActorControllerTest {
 
         ObjectMapper om = new ObjectMapper();
         om.findAndRegisterModules();
-        //when
+
+//  when
         mockMvc.perform(put("/actors/{id}", 1)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(om.writeValueAsString(updatedActor))
                         .accept(MediaType.APPLICATION_JSON))
 
-                //then
+//  then
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name").value("Name 2"))
                 .andExpect(jsonPath("$.sex").value("W"))
@@ -139,10 +150,10 @@ public class ActorControllerTest {
         ));
     }
 
-
     @Test
+    @WithMockUser(roles = {"ADMIN"})
     void updateActor_whenNoActorFound_addNewOne() throws Exception {
-        // given
+//  given
         Actor newActor = new Actor("New Name", 'W', LocalDate.of(1965, 5, 3),
                 (short) 170, (float) 7.9, 50000, "Link to picture 2");
 
@@ -152,13 +163,14 @@ public class ActorControllerTest {
 
         ObjectMapper om = new ObjectMapper();
         om.findAndRegisterModules();
-        //when
+
+//  when
         mockMvc.perform(put("/actors/{id}", 11)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(om.writeValueAsString(newActor))
                         .accept(MediaType.APPLICATION_JSON))
 
-                //then
+//  then
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name").value("New Name"))
                 .andExpect(jsonPath("$.sex").value("W"))
@@ -177,9 +189,14 @@ public class ActorControllerTest {
     }
 
     @Test
+    @WithMockUser(roles = {"ADMIN"})
     void deleteActor_deleteActorById_returnNothing() throws Exception {
+//  given
 
+//  when
         mockMvc.perform(delete("/actors/{id}", 11L))
+
+//  then
                 .andExpect(status().isOk());
 
         verify(this.actorService).deleteActorById(11L);
@@ -187,13 +204,16 @@ public class ActorControllerTest {
 
     @Test
     void getActorById_getActor_returnActor() throws Exception {
-
+//  given
         Actor actor = new Actor("Name 2", 'W', LocalDate.of(1965, 5, 3),
                 (short) 170, (float) 7.9, 50000, "Link to picture 2");
 
         given(this.actorService.findActorById(anyLong())).willReturn(actor);
 
+//  when
         mockMvc.perform(get("/actors/{id}", 2L))
+
+//  then
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name").value("Name 2"))
                 .andExpect(jsonPath("$.sex").value("W"))
