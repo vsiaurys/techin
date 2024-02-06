@@ -20,9 +20,9 @@ public class ReviewService {
         return reviewRepository.findAll();
     }
 
-//    public Movie findMovieById(long id) {
-//        return movieRepository.findById(id).orElseThrow();
-//    }
+    public Review findReviewById(long id) {
+        return reviewRepository.findById(id).orElseThrow();
+    }
 
     public Review saveReview(Review review) {
         return this.reviewRepository.save(review);
