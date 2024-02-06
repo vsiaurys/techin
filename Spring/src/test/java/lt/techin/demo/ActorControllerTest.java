@@ -20,8 +20,7 @@ import java.util.List;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -97,6 +96,29 @@ public class ActorControllerTest {
                 .andExpect(jsonPath("$.linkToPicture").value("Link to picture 2"));
 
         verify(this.actorService).saveActor(any(Actor.class));
+    }
+
+    @Test
+    @WithMockUser
+    void insertActor_whenNotAllowed_return403() throws Exception {
+//  given
+        Actor actor = new Actor("Name 2", 'W', LocalDate.of(1965, 5, 3),
+                (short) 170, (float) 7.9, 50000, "Link to picture 2");
+        given(this.actorService.saveActor(any(Actor.class))).willReturn(actor);
+
+        ObjectMapper om = new ObjectMapper();
+        om.findAndRegisterModules();
+
+//  when
+        mockMvc.perform(post("/actors")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON)
+                        .content(om.writeValueAsString(actor)))
+
+//  then
+                .andExpect(status().isForbidden());
+
+        verify(this.actorService, times(0)).saveActor(any(Actor.class));
     }
 
     @Test
