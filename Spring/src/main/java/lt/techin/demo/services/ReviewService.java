@@ -5,6 +5,8 @@ import lt.techin.demo.repositories.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ReviewService {
     private final ReviewRepository reviewRepository;
@@ -14,11 +16,10 @@ public class ReviewService {
         this.reviewRepository = reviewRepository;
     }
 
+    public List<Review> findAllReviews() {
+        return reviewRepository.findAll();
+    }
 
-//    public List<Movie> findAllMovies() {
-//        return movieRepository.findAll();
-//    }
-//
 //    public Movie findMovieById(long id) {
 //        return movieRepository.findById(id).orElseThrow();
 //    }
