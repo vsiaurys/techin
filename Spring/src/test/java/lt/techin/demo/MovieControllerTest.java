@@ -20,8 +20,7 @@ import java.util.List;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -150,6 +149,26 @@ public class MovieControllerTest {
     }
 
     @Test
+    @WithMockUser(roles = {"USER"})
+    void updateMovie_whenNotAllowed_return403() throws Exception {
+        //given
+        Movie movie = new Movie("Delivery Man", "Ken Scott",
+                LocalDate.of(2000, 11, 19), (short) 105);
+        given(this.movieService.saveMovie(any(Movie.class))).willReturn(movie);
+
+        ObjectMapper om = new ObjectMapper();
+        om.findAndRegisterModules();
+
+        //when
+        mockMvc.perform(post("/movies")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON)
+                        .content(om.writeValueAsString(movie)))
+                //then
+                .andExpect(status().isForbidden());
+    }
+
+    @Test
     @WithMockUser(roles = {"ADMIN"})
     void updateMovie_whenNoMovieFound_addNewOne() throws Exception {
         // given
@@ -207,6 +226,8 @@ public class MovieControllerTest {
         given(this.movieService.existsMovieById(anyLong())).willReturn(true);
         mockMvc.perform(delete("/movies/{id}", 11L))
                 .andExpect(status().isForbidden());
+
+        verify(this.movieService, times(0)).existsMovieById(11L);
     }
 
     @Test
