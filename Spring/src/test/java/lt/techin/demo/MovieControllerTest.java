@@ -101,6 +101,8 @@ public class MovieControllerTest {
                         .content(om.writeValueAsString(movie)))
                 //then
                 .andExpect(status().isForbidden());
+
+        verify(this.movieService, times(0)).saveMovie(any(Movie.class));
     }
 
     @Test
