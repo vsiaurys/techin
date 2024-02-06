@@ -3,7 +3,9 @@ package lt.techin.demo.controllers;
 import lt.techin.demo.models.Review;
 import lt.techin.demo.repositories.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.List;
 
@@ -27,8 +29,11 @@ public class ReviewController {
     }
 
     @PostMapping("/reviews")
-    public Review insertReview(@RequestBody Review review) {
-        return this.reviewRepository.save(review);
+    public ResponseEntity<Review> insertReview(@RequestBody Review review) {
+        Review savedReview = this.ReviewService.saveReview(review);
+
+        return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}").buildAndExpand(savedReview.getId()).toUri()).body(savedReview);
     }
 
     @PutMapping("/reviews/{id}")
