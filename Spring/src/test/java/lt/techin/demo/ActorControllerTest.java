@@ -269,4 +269,19 @@ public class ActorControllerTest {
 
         verify(this.actorService).findActorById(2L);
     }
+
+    @Test
+    @WithMockUser
+    void deleteActor_whenNotAllowed_return403() throws Exception {
+//  given
+        given(this.actorService.existsActorById(anyLong())).willReturn(true);
+
+//  when
+        mockMvc.perform(delete("/actors/{id}", 11L))
+
+//  then
+                .andExpect(status().isForbidden());
+
+        verify(this.actorService, times(0)).existsActorById(11L);
+    }
 }
