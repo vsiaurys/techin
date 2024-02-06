@@ -154,18 +154,21 @@ public class MovieControllerTest {
         //given
         Movie movie = new Movie("Delivery Man", "Ken Scott",
                 LocalDate.of(2000, 11, 19), (short) 105);
-        given(this.movieService.saveMovie(any(Movie.class))).willReturn(movie);
+
+        given(this.movieService.existsMovieById(anyLong())).willReturn(true);
 
         ObjectMapper om = new ObjectMapper();
         om.findAndRegisterModules();
 
         //when
-        mockMvc.perform(post("/movies")
+        mockMvc.perform(put("/movies/{id}", 1L)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)
                         .content(om.writeValueAsString(movie)))
                 //then
                 .andExpect(status().isForbidden());
+
+        verify(this.movieService, times(0)).existsMovieById(anyLong());
     }
 
     @Test
