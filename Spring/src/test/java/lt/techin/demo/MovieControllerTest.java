@@ -3,12 +3,15 @@ package lt.techin.demo;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lt.techin.demo.controllers.MovieController;
 import lt.techin.demo.models.Movie;
+import lt.techin.demo.security.SecurityConfig;
 import lt.techin.demo.services.MovieService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDate;
@@ -23,6 +26,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@Import(SecurityConfig.class)
 @WebMvcTest(controllers = MovieController.class)
 public class MovieControllerTest {
     @Autowired
@@ -55,17 +59,21 @@ public class MovieControllerTest {
     }
 
     @Test
+    @WithMockUser(roles = {"ADMIN"})
     void insertMovie_whenSaveMovie_thenReturnIt() throws Exception {
 //      given
         Movie movie = new Movie("Delivery Man", "Ken Scott",
                 LocalDate.of(2000, 11, 19), (short) 105);
         given(this.movieService.saveMovie(any(Movie.class))).willReturn(movie);
 
+        ObjectMapper om = new ObjectMapper();
+        om.findAndRegisterModules();
+
 //      when
         mockMvc.perform(post("/movies")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)
-                        .content(new ObjectMapper().writeValueAsString(movie)))
+                        .content(om.writeValueAsString(movie)))
 //      then
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.title").value("Delivery Man"))
@@ -77,6 +85,7 @@ public class MovieControllerTest {
     }
 
     @Test
+    @WithMockUser(roles = {"ADMIN"})
     void updateMovie_whenUpdateFields_thenReturn() throws Exception {
 
         // given
@@ -91,11 +100,13 @@ public class MovieControllerTest {
         given(this.movieService.saveMovie(any(Movie.class)))
                 .willReturn(updatedMovie);
 
+        ObjectMapper om = new ObjectMapper();
+        om.findAndRegisterModules();
 
         //when
         mockMvc.perform(put("/movies/{id}", 1)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(new ObjectMapper().writeValueAsString(updatedMovie))
+                        .content(om.writeValueAsString(updatedMovie))
                         .accept(MediaType.APPLICATION_JSON))
 
                 //then
@@ -119,6 +130,7 @@ public class MovieControllerTest {
     }
 
     @Test
+    @WithMockUser(roles = {"ADMIN"})
     void updateMovie_whenNoMovieFound_addNewOne() throws Exception {
         // given
         Movie newMovie = new Movie("New Movie", "Director 3",
@@ -127,17 +139,20 @@ public class MovieControllerTest {
         given(this.movieService.existsMovieById(anyLong())).willReturn(false);
         given(this.movieService.saveMovie(any(Movie.class)))
                 .willReturn(newMovie);
+
+        ObjectMapper om = new ObjectMapper();
+        om.findAndRegisterModules();
         //when
         mockMvc.perform(put("/movies/{id}", 11)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(new ObjectMapper().writeValueAsString(newMovie))
+                        .content(om.writeValueAsString(newMovie))
                         .accept(MediaType.APPLICATION_JSON))
 
                 //then
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.title").value("New Movie"))
                 .andExpect(jsonPath("$.director").value("Director 3"))
-                .andExpect(jsonPath("$.dateReleased").value("200-11-19"))
+                .andExpect(jsonPath("$.dateReleased").value("2000-11-19"))
                 .andExpect(jsonPath("$.lengthMinutes").value(123));
 
         verify(this.movieService).existsMovieById(11L);
@@ -149,6 +164,7 @@ public class MovieControllerTest {
     }
 
     @Test
+    @WithMockUser(roles = {"ADMIN"})
     void deleteMovie_whenMovieExists_return204() throws Exception {
         given(this.movieService.existsMovieById(anyLong())).willReturn(true);
         mockMvc.perform(delete("/movies/{id}", 11L))
@@ -158,6 +174,7 @@ public class MovieControllerTest {
     }
 
     @Test
+    @WithMockUser(roles = {"ADMIN"})
     void deleteMovie_whenNoMovieFound_return404() throws Exception {
         given(this.movieService.existsMovieById(anyLong())).willReturn(false);
         mockMvc.perform(delete("/movies/{id}", 11L))
