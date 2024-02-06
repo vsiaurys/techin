@@ -31,8 +31,8 @@ public class ReviewService {
 //    public boolean existsMovieById(long id) {
 //        return this.movieRepository.existsById(id);
 //    }
-//
-//    public void deleteMovieById(long id) {
-//        this.movieRepository.deleteById(id);
+
+//    public void deleteReviewById(long id) {
+//        this.reviewRepository.deleteById(id);
 //    }
 }
