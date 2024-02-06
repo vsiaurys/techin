@@ -35,13 +35,16 @@ public class MovieControllerTest {
 
     @Test
     void getMovies_saveMovies_returnAll() throws Exception {
+//  given
         given(this.movieService.findAllMovies()).willReturn(List.of(
                 new Movie("Madagascar", "Stephen Spielberg",
                         LocalDate.of(1976, 5, 13), (short) 60),
                 new Movie("Home Alone", "Stephen Spielberg",
                         LocalDate.of(2000, 11, 19), (short) 120)));
-
+//  when
         mockMvc.perform(get("/movies"))
+
+//  then
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].title").value("Madagascar"))
                 .andExpect(jsonPath("$[0].director").value("Stephen Spielberg"))
@@ -60,7 +63,7 @@ public class MovieControllerTest {
     @Test
     @WithMockUser(roles = {"ADMIN"})
     void insertMovie_whenSaveMovie_thenReturnIt() throws Exception {
-//      given
+//  given
         Movie movie = new Movie("Delivery Man", "Ken Scott",
                 LocalDate.of(2000, 11, 19), (short) 105);
         given(this.movieService.saveMovie(any(Movie.class))).willReturn(movie);
@@ -68,12 +71,12 @@ public class MovieControllerTest {
         ObjectMapper om = new ObjectMapper();
         om.findAndRegisterModules();
 
-//      when
+//  when
         mockMvc.perform(post("/movies")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)
                         .content(om.writeValueAsString(movie)))
-//      then
+//  then
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.title").value("Delivery Man"))
                 .andExpect(jsonPath("$.director").value("Ken Scott"))
@@ -84,9 +87,9 @@ public class MovieControllerTest {
     }
 
     @Test
-    @WithMockUser(roles = {"USER"})
+    @WithMockUser
     void insertMovie_whenNotAllowed_return403() throws Exception {
-        //given
+//  given
         Movie movie = new Movie("Delivery Man", "Ken Scott",
                 LocalDate.of(2000, 11, 19), (short) 105);
         given(this.movieService.saveMovie(any(Movie.class))).willReturn(movie);
@@ -94,12 +97,13 @@ public class MovieControllerTest {
         ObjectMapper om = new ObjectMapper();
         om.findAndRegisterModules();
 
-        //when
+//  when
         mockMvc.perform(post("/movies")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)
                         .content(om.writeValueAsString(movie)))
-                //then
+
+//  then
                 .andExpect(status().isForbidden());
 
         verify(this.movieService, times(0)).saveMovie(any(Movie.class));
@@ -108,8 +112,7 @@ public class MovieControllerTest {
     @Test
     @WithMockUser(roles = {"ADMIN"})
     void updateMovie_whenUpdateFields_thenReturn() throws Exception {
-
-        // given
+//  given
         Movie existingMovie = new Movie("Existing Movie", "Director 1",
                 LocalDate.of(1976, 5, 13), (short) 105);
         Movie updatedMovie = new Movie("Updated Movie", "Director 2",
@@ -124,13 +127,13 @@ public class MovieControllerTest {
         ObjectMapper om = new ObjectMapper();
         om.findAndRegisterModules();
 
-        //when
+//  when
         mockMvc.perform(put("/movies/{id}", 1)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(om.writeValueAsString(updatedMovie))
                         .accept(MediaType.APPLICATION_JSON))
 
-                //then
+//  then
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.title").value("Updated Movie"))
                 .andExpect(jsonPath("$.director").value("Director 2"))
@@ -151,9 +154,9 @@ public class MovieControllerTest {
     }
 
     @Test
-    @WithMockUser(roles = {"USER"})
+    @WithMockUser
     void updateMovie_whenNotAllowed_return403() throws Exception {
-        //given
+//  given
         Movie movie = new Movie("Delivery Man", "Ken Scott",
                 LocalDate.of(2000, 11, 19), (short) 105);
 
@@ -162,12 +165,12 @@ public class MovieControllerTest {
         ObjectMapper om = new ObjectMapper();
         om.findAndRegisterModules();
 
-        //when
+//  when
         mockMvc.perform(put("/movies/{id}", 1L)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)
                         .content(om.writeValueAsString(movie)))
-                //then
+//  then
                 .andExpect(status().isForbidden());
 
         verify(this.movieService, times(0)).existsMovieById(anyLong());
@@ -176,7 +179,7 @@ public class MovieControllerTest {
     @Test
     @WithMockUser(roles = {"ADMIN"})
     void updateMovie_whenNoMovieFound_addNewOne() throws Exception {
-        // given
+//  given
         Movie newMovie = new Movie("New Movie", "Director 3",
                 LocalDate.of(2000, 11, 19), (short) 123);
 
@@ -186,13 +189,13 @@ public class MovieControllerTest {
 
         ObjectMapper om = new ObjectMapper();
         om.findAndRegisterModules();
-        //when
+//  when
         mockMvc.perform(put("/movies/{id}", 11)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(om.writeValueAsString(newMovie))
                         .accept(MediaType.APPLICATION_JSON))
 
-                //then
+//  then
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.title").value("New Movie"))
                 .andExpect(jsonPath("$.director").value("Director 3"))
@@ -210,8 +213,13 @@ public class MovieControllerTest {
     @Test
     @WithMockUser(roles = {"ADMIN"})
     void deleteMovie_whenMovieExists_return204() throws Exception {
+//  given
         given(this.movieService.existsMovieById(anyLong())).willReturn(true);
+
+//  when
         mockMvc.perform(delete("/movies/{id}", 11L))
+
+// then
                 .andExpect(status().isNoContent());
 
         verify(this.movieService).deleteMovieById(11L);
@@ -220,16 +228,26 @@ public class MovieControllerTest {
     @Test
     @WithMockUser(roles = {"ADMIN"})
     void deleteMovie_whenNoMovieFound_return404() throws Exception {
+//  given
         given(this.movieService.existsMovieById(anyLong())).willReturn(false);
+
+//  when
         mockMvc.perform(delete("/movies/{id}", 11L))
+
+//  then
                 .andExpect(status().isNotFound());
     }
 
     @Test
-    @WithMockUser(roles = {"USER"})
+    @WithMockUser
     void deleteMovie_whenNotAllowed_return403() throws Exception {
+//  given
         given(this.movieService.existsMovieById(anyLong())).willReturn(true);
+
+//  when
         mockMvc.perform(delete("/movies/{id}", 11L))
+
+//  then
                 .andExpect(status().isForbidden());
 
         verify(this.movieService, times(0)).existsMovieById(11L);
@@ -237,13 +255,16 @@ public class MovieControllerTest {
 
     @Test
     void getMovieById_GetMovie_returnMovie() throws Exception {
-
+//  given
         Movie movie = new Movie("Delivery Man", "Ken Scott",
                 LocalDate.of(2000, 11, 19), (short) 105);
 
         given(this.movieService.findMovieById(anyLong())).willReturn(movie);
 
+//  when
         mockMvc.perform(get("/movies/{id}", 2L))
+
+//  then
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.title").value("Delivery Man"))
                 .andExpect(jsonPath("$.director").value("Ken Scott"))
