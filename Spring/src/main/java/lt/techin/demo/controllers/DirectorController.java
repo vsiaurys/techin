@@ -2,6 +2,8 @@ package lt.techin.demo.controllers;
 
 
 import lt.techin.demo.models.Director;
+import lt.techin.demo.services.DirectorService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,6 +12,7 @@ import java.util.List;
 public class DirectorController {
     private final DirectorService directorService;
 
+    @Autowired
     public DirectorController(DirectorService directorService) {
         this.directorService = directorService;
     }
