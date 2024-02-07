@@ -28,13 +28,12 @@ public class DirectorMovieService {
     public DirectorMovie saveDirectorMovie(DirectorMovie directorMovie) {
         return this.directorMovieRepository.save(directorMovie);
     }
-//
-//    public boolean existsMovieById(long id) {
-//        return this.movieRepository.existsById(id);
-//    }
-//
-//    public void deleteMovieById(long id) {
-//        this.movieRepository.deleteById(id);
-//    }
 
+    public boolean existsDirectorMovieById(DirectorMovieId directorMovieId) {
+        return this.directorMovieRepository.existsById(directorMovieId);
+    }
+
+    public void deleteDirectorMovieById(DirectorMovieId directorMovieId) {
+        this.directorMovieRepository.deleteById(directorMovieId);
+    }
 }
