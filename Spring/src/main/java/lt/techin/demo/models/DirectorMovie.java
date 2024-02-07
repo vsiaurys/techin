@@ -17,4 +17,5 @@ public class DirectorMovie {
     public void setDirectorMovieId(DirectorMovieId directorMovieId) {
         this.directorMovieId = directorMovieId;
     }
+
 }

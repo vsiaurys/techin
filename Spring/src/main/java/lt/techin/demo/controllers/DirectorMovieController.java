@@ -43,27 +43,33 @@ public class DirectorMovieController {
         return this.directorMovieService.saveDirectorMovie(directorMovie);
     }
 
-    /*
+    @PutMapping("/directors/{directorId}/movies/{movieId}")
+    public ResponseEntity<DirectorMovie> updateDirectorMovie(@PathVariable("directorId") long directorId, @PathVariable("movieId") long movieId) {
+        Director director = this.directorService.findDirectorById(directorId);
+        Movie movie = this.movieService.findMovieById(movieId);
+        DirectorMovieId directorMovieId = new DirectorMovieId(director, movie);
 
-    @PutMapping("/movies/{id}")
-    public ResponseEntity<Movie> updateMovie(@RequestBody Movie movie, @PathVariable long id) {
-        if (this.movieService.existsMovieById(id)) {
-            Movie movieFromDb = this.movieService.findMovieById(id);
+        if (this.directorMovieService.existsDirectorMovieById(directorMovieId)) {
+            Director newDirector = this.directorService.findDirectorById(directorId);
+            Movie newMovie = this.movieService.findMovieById(movieId);
+            DirectorMovieId newDirectorMovieId = new DirectorMovieId(newDirector, newMovie);
 
-            movieFromDb.setTitle(movie.getTitle());
-            movieFromDb.setDateReleased(movie.getDateReleased());
-            movieFromDb.setLengthMinutes(movie.getLengthMinutes());
+            DirectorMovie newDirectorMovie = new DirectorMovie(newDirectorMovieId);
 
-            return ResponseEntity.ok(this.movieService.saveMovie(movieFromDb));
+            return this.directorMovieService.saveDirectorMovie(newDirectorMovie);
         }
-        Movie savedMovie = this.movieService.saveMovie(movie);
+        DirectorMovie savedDirectorMovie = new DirectorMovie(DirectorMovieId);
+        return this.directorMovieService.saveDirectorMovie(savedDirectorMovie);
 
-        return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{id}").buildAndExpand(savedMovie.getId()).toUri()).body(savedMovie);
+
+//        return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequest()
+//                .path("/{id}").buildAndExpand(savedDirectorMovie.getId()).toUri()).body(savedDirectorMovie);
+
     }
-*/
+
     @DeleteMapping("/directors/{directorId}/movies/{movieId}")
-    public ResponseEntity<Void> deleteDirectorMovie(@PathVariable("directorId") long directorId, @PathVariable("movieId") long movieId) {
+    public ResponseEntity<Void> deleteDirectorMovie(@PathVariable("directorId") long directorId,
+                                                    @PathVariable("movieId") long movieId) {
         Director director = this.directorService.findDirectorById(directorId);
         Movie movie = this.movieService.findMovieById(movieId);
         DirectorMovieId directorMovieId = new DirectorMovieId(director, movie);
