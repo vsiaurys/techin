@@ -43,29 +43,27 @@ public class DirectorMovieController {
         return this.directorMovieService.saveDirectorMovie(directorMovie);
     }
 
-    @PutMapping("/directors/{directorId}/movies/{movieId}")
-    public ResponseEntity<DirectorMovie> updateDirectorMovie(@PathVariable("directorId") long directorId, @PathVariable("movieId") long movieId) {
-        Director director = this.directorService.findDirectorById(directorId);
-        Movie movie = this.movieService.findMovieById(movieId);
-        DirectorMovieId directorMovieId = new DirectorMovieId(director, movie);
-
-        if (this.directorMovieService.existsDirectorMovieById(directorMovieId)) {
-            Director newDirector = this.directorService.findDirectorById(directorId);
-            Movie newMovie = this.movieService.findMovieById(movieId);
-            DirectorMovieId newDirectorMovieId = new DirectorMovieId(newDirector, newMovie);
-
-            DirectorMovie newDirectorMovie = new DirectorMovie(newDirectorMovieId);
-
-            return this.directorMovieService.saveDirectorMovie(newDirectorMovie);
-        }
-        DirectorMovie savedDirectorMovie = new DirectorMovie(DirectorMovieId);
-        return this.directorMovieService.saveDirectorMovie(savedDirectorMovie);
-
-
+//    @PutMapping("/directors/{directorId}/movies/{movieId}")
+//    public ResponseEntity<DirectorMovie> updateDirectorMovie(@RequestBody DirectorMovie directorMovie, @PathVariable("directorId") long directorId, @PathVariable("movieId") long movieId) {
+//        Director director = this.directorService.findDirectorById(directorId);
+//        Movie movie = this.movieService.findMovieById(movieId);
+//        DirectorMovieId directorMovieId = new DirectorMovieId(director, movie);
+//
+//        if (this.directorMovieService.existsDirectorMovieById(directorMovieId)) {
+//            Director newDirector = directorMovie.getDirectorMovieId().getDirector();
+//            Movie newMovie = directorMovie.getDirectorMovieId().getMovie();
+//            DirectorMovieId newDirectorMovieId = new DirectorMovieId(newDirector, newMovie);
+//            directorMovie.setDirectorMovieId(newDirectorMovieId);
+//
+//            return ResponseEntity.ok(this.directorMovieService.saveDirectorMovie(directorMovie));
+//        }
+//
+//        DirectorMovie savedDirectorMovie = this.directorMovieService.saveDirectorMovie(directorMovie);
+//
 //        return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequest()
-//                .path("/{id}").buildAndExpand(savedDirectorMovie.getId()).toUri()).body(savedDirectorMovie);
-
-    }
+//                .path("/{id}").buildAndExpand(savedDirectorMovie.getDirectorMovieId()).toUri()).body(savedDirectorMovie);
+//
+//    }
 
     @DeleteMapping("/directors/{directorId}/movies/{movieId}")
     public ResponseEntity<Void> deleteDirectorMovie(@PathVariable("directorId") long directorId,
