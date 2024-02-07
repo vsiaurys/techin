@@ -4,6 +4,7 @@ import lt.techin.demo.models.Director;
 import lt.techin.demo.models.DirectorMovie;
 import lt.techin.demo.models.DirectorMovieId;
 import lt.techin.demo.models.Movie;
+import lt.techin.demo.repositories.DirectorMovieRepository;
 import lt.techin.demo.services.DirectorService;
 import lt.techin.demo.services.MovieService;
 import org.springframework.web.bind.annotation.*;
