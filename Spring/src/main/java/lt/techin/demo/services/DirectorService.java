@@ -1,6 +1,7 @@
 package lt.techin.demo.services;
 
 import lt.techin.demo.models.Director;
+import lt.techin.demo.repositories.DirectorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
