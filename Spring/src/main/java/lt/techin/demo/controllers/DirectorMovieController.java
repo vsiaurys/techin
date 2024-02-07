@@ -63,7 +63,10 @@ public class DirectorMovieController {
     }
 */
     @DeleteMapping("/directors/{directorId}/movies/{movieId}")
-    public ResponseEntity<Void> deleteDirectorMovie(@PathVariable DirectorMovieId directorMovieId) {
+    public ResponseEntity<Void> deleteDirectorMovie(@PathVariable("directorId") long directorId, @PathVariable("movieId") long movieId) {
+        Director director = this.directorService.findDirectorById(directorId);
+        Movie movie = this.movieService.findMovieById(movieId);
+        DirectorMovieId directorMovieId = new DirectorMovieId(director, movie);
 
         if (this.directorMovieService.existsDirectorMovieById(directorMovieId)) {
             this.directorMovieService.deleteDirectorMovieById(directorMovieId);
