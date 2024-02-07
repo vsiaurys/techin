@@ -56,6 +56,10 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.PUT, "/directors/{id}").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/directors/{id}").hasRole("ADMIN")
 
+                        .requestMatchers(HttpMethod.GET, "/actorsmovies").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/actors/{directorId}/movies/{movieId}").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/actorsmovies").hasRole("ADMIN")
+
                         .requestMatchers(HttpMethod.GET, "/directorsmovies").permitAll()
                         .requestMatchers(HttpMethod.GET, "/directors/{directorId}/movies/{movieId}").permitAll()
                         .requestMatchers(HttpMethod.POST, "/directorsmovies").hasRole("ADMIN")
