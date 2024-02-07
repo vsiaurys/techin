@@ -42,7 +42,6 @@ public class MovieController {
             Movie movieFromDb = this.movieService.findMovieById(id);
 
             movieFromDb.setTitle(movie.getTitle());
-            movieFromDb.setDirector(movie.getDirector());
             movieFromDb.setDateReleased(movie.getDateReleased());
             movieFromDb.setLengthMinutes(movie.getLengthMinutes());
 

@@ -17,17 +17,13 @@ public class Movie {
     @NotNull
     @Size(min = 1, message = "Title should be at least 1 characters long")
     private String title;
-    @NotNull
-    @Size(min = 1, message = "Director should be at least 1 characters long")
-    private String director;
     @PastOrPresent(message = "The release date should be present or past only")
     private LocalDate dateReleased;
     @Min(value = 30, message = "The length of movie should be in range between 30 and 600 minutes")
     private short lengthMinutes;
 
-    public Movie(String title, String director, LocalDate dateReleased, short lengthMinutes) {
+    public Movie(String title, LocalDate dateReleased, short lengthMinutes) {
         this.title = title;
-        this.director = director;
         this.dateReleased = dateReleased;
         this.lengthMinutes = lengthMinutes;
     }
@@ -44,10 +40,6 @@ public class Movie {
         return title;
     }
 
-    public String getDirector() {
-        return director;
-    }
-
     public LocalDate getDateReleased() {
         return dateReleased;
     }
@@ -58,10 +50,6 @@ public class Movie {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public void setDirector(String director) {
-        this.director = director;
     }
 
     public void setDateReleased(LocalDate dateReleased) {
