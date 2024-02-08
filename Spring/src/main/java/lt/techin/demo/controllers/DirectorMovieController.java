@@ -44,7 +44,9 @@ public class DirectorMovieController {
     @PostMapping("/directorsmovies")
     public DirectorMovie insertDirectorMovie(@RequestBody DirectorMovie directorMovie) {
         return this.directorMovieService.saveDirectorMovie(directorMovie);
+
     }
+
 
     @PutMapping("/directors/{directorId}/movies/{movieId}")
     public ResponseEntity<DirectorMovie> updateDirectorMovie(@RequestBody DirectorMovie directorMovie, @PathVariable("directorId") long directorId, @PathVariable("movieId") long movieId) {
@@ -60,10 +62,11 @@ public class DirectorMovieController {
 
         DirectorMovie savedDirectorMovie = this.directorMovieService.saveDirectorMovie(directorMovie);
 
-        return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/directors/{directorId}/movies/{movieId}")
-                .buildAndExpand(savedDirectorMovie.getDirectorMovieId().getDirector().getId(), savedDirectorMovie.getDirectorMovieId().getMovie().getId())
-                .toUri()).body(savedDirectorMovie);
+        return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentContextPath()
+                        .path("directors/{directorId}/movies/{movieId}")
+                        .buildAndExpand(savedDirectorMovie.getDirectorMovieId().getDirector().getId(), savedDirectorMovie.getDirectorMovieId().getMovie().getId())
+                        .toUri())
+                .body(savedDirectorMovie);
     }
 
     @DeleteMapping("/directors/{directorId}/movies/{movieId}")
