@@ -36,22 +36,18 @@ public class MovieControllerTest {
     void getMovies_saveMovies_returnAll() throws Exception {
 //  given
         given(this.movieService.findAllMovies()).willReturn(List.of(
-                new Movie("Madagascar", "Stephen Spielberg",
-                        LocalDate.of(1976, 5, 13), (short) 60),
-                new Movie("Home Alone", "Stephen Spielberg",
-                        LocalDate.of(2000, 11, 19), (short) 120)));
+                new Movie("Madagascar", LocalDate.of(1976, 5, 13), (short) 60),
+                new Movie("Home Alone", LocalDate.of(2000, 11, 19), (short) 120)));
 //  when
         mockMvc.perform(get("/movies"))
 
 //  then
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].title").value("Madagascar"))
-                .andExpect(jsonPath("$[0].director").value("Stephen Spielberg"))
                 .andExpect(jsonPath("$[0].dateReleased").value("1976-05-13"))
                 .andExpect(jsonPath("$[0].lengthMinutes").value(60))
 
                 .andExpect(jsonPath("$[1].title").value("Home Alone"))
-                .andExpect(jsonPath("$[1].director").value("Stephen Spielberg"))
                 .andExpect(jsonPath("$[1].dateReleased").value("2000-11-19"))
                 .andExpect(jsonPath("$[1].lengthMinutes").value(120));
 
@@ -63,8 +59,7 @@ public class MovieControllerTest {
     @WithMockUser(roles = {"ADMIN"})
     void insertMovie_whenSaveMovie_thenReturnIt() throws Exception {
 //  given
-        Movie movie = new Movie("Delivery Man", "Ken Scott",
-                LocalDate.of(2000, 11, 19), (short) 105);
+        Movie movie = new Movie("Delivery Man", LocalDate.of(2000, 11, 19), (short) 105);
         given(this.movieService.saveMovie(any(Movie.class))).willReturn(movie);
 
         ObjectMapper om = new ObjectMapper();
@@ -78,7 +73,6 @@ public class MovieControllerTest {
 //  then
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.title").value("Delivery Man"))
-                .andExpect(jsonPath("$.director").value("Ken Scott"))
                 .andExpect(jsonPath("$.dateReleased").value("2000-11-19"))
                 .andExpect(jsonPath("$.lengthMinutes").value(105));
 
@@ -89,8 +83,7 @@ public class MovieControllerTest {
     @WithMockUser
     void insertMovie_whenNotAllowed_return403() throws Exception {
 //  given
-        Movie movie = new Movie("Delivery Man", "Ken Scott",
-                LocalDate.of(2000, 11, 19), (short) 105);
+        Movie movie = new Movie("Delivery Man", LocalDate.of(2000, 11, 19), (short) 105);
         given(this.movieService.saveMovie(any(Movie.class))).willReturn(movie);
 
         ObjectMapper om = new ObjectMapper();
@@ -112,10 +105,8 @@ public class MovieControllerTest {
     @WithMockUser(roles = {"ADMIN"})
     void updateMovie_whenUpdateFields_thenReturn() throws Exception {
 //  given
-        Movie existingMovie = new Movie("Existing Movie", "Director 1",
-                LocalDate.of(1976, 5, 13), (short) 105);
-        Movie updatedMovie = new Movie("Updated Movie", "Director 2",
-                LocalDate.of(2000, 11, 19), (short) 90);
+        Movie existingMovie = new Movie("Existing Movie", LocalDate.of(1976, 5, 13), (short) 105);
+        Movie updatedMovie = new Movie("Updated Movie", LocalDate.of(2000, 11, 19), (short) 90);
 
         given(this.movieService.existsMovieById(anyLong())).willReturn(true);
         given(this.movieService.findMovieById(anyLong()))
@@ -135,7 +126,6 @@ public class MovieControllerTest {
 //  then
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.title").value("Updated Movie"))
-                .andExpect(jsonPath("$.director").value("Director 2"))
                 .andExpect(jsonPath("$.dateReleased").value("2000-11-19"))
                 .andExpect(jsonPath("$.lengthMinutes").value(90));
 
@@ -143,7 +133,6 @@ public class MovieControllerTest {
         verify(this.movieService).findMovieById(1L);
         verify(this.movieService).saveMovie(argThat(m -> {
                     assertThat(m.getTitle()).isEqualTo("Updated Movie");
-                    assertThat(m.getDirector()).isEqualTo("Director 2");
                     assertThat(m.getDateReleased()).isEqualTo("2000-11-19");
                     assertThat(m.getLengthMinutes()).isEqualTo((short) 90);
 
@@ -156,8 +145,7 @@ public class MovieControllerTest {
     @WithMockUser
     void updateMovie_whenNotAllowed_return403() throws Exception {
 //  given
-        Movie movie = new Movie("Delivery Man", "Ken Scott",
-                LocalDate.of(2000, 11, 19), (short) 105);
+        Movie movie = new Movie("Delivery Man", LocalDate.of(2000, 11, 19), (short) 105);
 
         given(this.movieService.existsMovieById(anyLong())).willReturn(true);
 
@@ -179,8 +167,7 @@ public class MovieControllerTest {
     @WithMockUser(roles = {"ADMIN"})
     void updateMovie_whenNoMovieFound_addNewOne() throws Exception {
 //  given
-        Movie newMovie = new Movie("New Movie", "Director 3",
-                LocalDate.of(2000, 11, 19), (short) 123);
+        Movie newMovie = new Movie("New Movie", LocalDate.of(2000, 11, 19), (short) 123);
 
         given(this.movieService.existsMovieById(anyLong())).willReturn(false);
         given(this.movieService.saveMovie(any(Movie.class)))
@@ -197,7 +184,6 @@ public class MovieControllerTest {
 //  then
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.title").value("New Movie"))
-                .andExpect(jsonPath("$.director").value("Director 3"))
                 .andExpect(jsonPath("$.dateReleased").value("2000-11-19"))
                 .andExpect(jsonPath("$.lengthMinutes").value(123));
 
@@ -255,8 +241,7 @@ public class MovieControllerTest {
     @Test
     void getMovieById_GetMovie_returnMovie() throws Exception {
 //  given
-        Movie movie = new Movie("Delivery Man", "Ken Scott",
-                LocalDate.of(2000, 11, 19), (short) 105);
+        Movie movie = new Movie("Delivery Man", LocalDate.of(2000, 11, 19), (short) 105);
 
         given(this.movieService.findMovieById(anyLong())).willReturn(movie);
 
@@ -266,7 +251,6 @@ public class MovieControllerTest {
 //  then
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.title").value("Delivery Man"))
-                .andExpect(jsonPath("$.director").value("Ken Scott"))
                 .andExpect(jsonPath("$.dateReleased").value("2000-11-19"))
                 .andExpect(jsonPath("$.lengthMinutes").value(105));
 

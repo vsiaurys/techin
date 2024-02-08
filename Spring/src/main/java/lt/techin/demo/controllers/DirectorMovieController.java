@@ -47,7 +47,6 @@ public class DirectorMovieController {
 
     }
 
-
     @PutMapping("/directors/{directorId}/movies/{movieId}")
     public ResponseEntity<DirectorMovie> updateDirectorMovie(@RequestBody DirectorMovie directorMovie, @PathVariable("directorId") long directorId, @PathVariable("movieId") long movieId) {
         Director director = this.directorService.findDirectorById(directorId);
