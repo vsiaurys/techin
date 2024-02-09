@@ -40,7 +40,23 @@ function isEvenOrOdd(number) {
   }
 }
 
-// Sąlyginis sakinys. Raskite didžiausią skaičių iš dviejų duotų. Išbandykite kelis būdus:
+// 4. Sąlyginis sakinys. Raskite didžiausią skaičių iš dviejų duotų. Išbandykite kelis būdus:
+console.log("\nPart 4:\n");
+
+const number1 = 15;
+const number2 = 12;
+
+greaterNumber(number1, number2);
+
+function greaterNumber() {
+  if (number1 > number2)
+    console.log(`The number ${number1} is greater than number ${number2}`);
+  else console.log(`The number ${number2} is greater than number ${number1}`);
+
+  number1 > number2
+    ? console.log(`The number ${number1} is greater than number ${number2}`)
+    : console.log(`The number ${number2} is greater than number ${number1}`);
+}
 
 // Sąlyginis sakinys
 // Ternary operator
