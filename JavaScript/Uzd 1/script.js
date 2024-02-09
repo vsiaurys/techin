@@ -1,16 +1,30 @@
 // 1.  Tiesinis algoritmas. Parašykite programą nurodytam parų skaičiui išreikšti valandomis ir minutėmis.
-let daysGiven = 10;
+console.log("Part 1:\n");
+
+const daysGiven = 10;
 
 daysToHoursAndMinutes(daysGiven);
 
 function daysToHoursAndMinutes(days) {
-  let hours = days * 24;
-  let minutes = hours * 60;
+  const hours = days * 24;
+  const minutes = hours * 60;
 
-  alert(`There are ${hours} hours or ${minutes} minutes in ${days} days.`);
+  console.log(
+    `There are ${hours} hours or ${minutes} minutes in ${days} days.`
+  );
 }
 
-// Tiesinis algoritmas. Duotas realusis skaičius x. Parašykite programą, kuri apskaičiuotų y reikšmę pagal formulę y = 16x4+ 2x. Naudoti Math object.
+// 2. Tiesinis algoritmas. Duotas realusis skaičius x. Parašykite programą, kuri apskaičiuotų y reikšmę pagal formulę y = 16x4+ 2x. Naudoti Math object.
+// console.log("\nPart 2:\n");
+
+// const x = 3;
+
+// console.log(y(x));
+
+// function y(x) {
+//   return 16 * Math.pow(x, 4) + 2 * x;
+// }
+
 // Sąlyginis sakinys. Patikrinkite ar skaičius lyginis ar nelyginis.
 // Sąlyginis sakinys. Raskite didžiausią skaičių iš dviejų duotų. Išbandykite kelis būdus:
 
