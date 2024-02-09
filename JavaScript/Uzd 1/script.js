@@ -25,7 +25,21 @@ function y(x) {
   return 16 * Math.pow(x, 4) + 2 * x;
 }
 
-// Sąlyginis sakinys. Patikrinkite ar skaičius lyginis ar nelyginis.
+// 3. Sąlyginis sakinys. Patikrinkite ar skaičius lyginis ar nelyginis.
+console.log("\nPart 3:\n");
+
+const number = 12;
+
+isEvenOrOdd(number);
+
+function isEvenOrOdd(number) {
+  if (number % 2 === 0) {
+    console.log(`The number ${number} is even.`);
+  } else {
+    console.log(`The number ${number} is odd.`);
+  }
+}
+
 // Sąlyginis sakinys. Raskite didžiausią skaičių iš dviejų duotų. Išbandykite kelis būdus:
 
 // Sąlyginis sakinys
