@@ -69,7 +69,49 @@ function greaterNumber() {
   }
 }
 
-// Sąlyginis sakinys. Pagal duotą taškų vertinimo lentelę, pateikti įvertinimą.
+// 5. Sąlyginis sakinys. Pagal duotą taškų vertinimo lentelę, pateikti įvertinimą.
+console.log("\nPart 5:\n");
+
+const ts = 29;
+printGrade(ts);
+
+function printGrade(ts) {
+  switch (true) {
+    case ts < 30:
+      console.log("You failed the exam");
+      break;
+    case ts < 35:
+      console.log("Your grade is 1");
+      break;
+    case ts < 40:
+      console.log("Your grade is 2");
+      break;
+    case ts < 45:
+      console.log("Your grade is 3");
+      break;
+    case ts < 50:
+      console.log("Your grade is 4");
+      break;
+    default:
+      console.log("Your grade is 5");
+  }
+}
+
+// function printGrade(ts) {
+//   if (ts < 29) {
+//     console.log("You failed the exam");
+//   } else if (ts < 35) {
+//     console.log("Your grade is 1");
+//   } else if (ts < 40) {
+//     console.log("Your grade is 2");
+//   } else if (ts < 45) {
+//     console.log("Your grade is 3");
+//   } else if (ts < 50) {
+//     console.log("Your grade is 4");
+//   } else {
+//     console.log("Your grade is 5");
+//   }
+// }
 
 // Sąlyginis sakinys. Apskaičiuokite kūno masės indeksą ir nurodykite reikšmę.
 // Pavyzdys: http://sveikas.lt/lt/kmi-skaiciuokle/#
