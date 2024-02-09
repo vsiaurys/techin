@@ -15,15 +15,15 @@ function daysToHoursAndMinutes(days) {
 }
 
 // 2. Tiesinis algoritmas. Duotas realusis skaičius x. Parašykite programą, kuri apskaičiuotų y reikšmę pagal formulę y = 16x4+ 2x. Naudoti Math object.
-// console.log("\nPart 2:\n");
+console.log("\nPart 2:\n");
 
-// const x = 3;
+const x = 3;
 
-// console.log(y(x));
+console.log(y(x));
 
-// function y(x) {
-//   return 16 * Math.pow(x, 4) + 2 * x;
-// }
+function y(x) {
+  return 16 * Math.pow(x, 4) + 2 * x;
+}
 
 // Sąlyginis sakinys. Patikrinkite ar skaičius lyginis ar nelyginis.
 // Sąlyginis sakinys. Raskite didžiausią skaičių iš dviejų duotų. Išbandykite kelis būdus:
