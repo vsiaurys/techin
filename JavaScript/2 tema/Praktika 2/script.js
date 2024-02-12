@@ -1,19 +1,11 @@
-const tagP = document.querySelector("p");
+const tagImg = document.querySelector("img");
 
-const buttonYellow = document.querySelector(".button-yellow");
-buttonYellow.addEventListener("click", function () {
-  tagP.className = "";
-  tagP.classList.add("text-warning");
+const buttonIncrease = document.querySelector(".increase");
+buttonIncrease.addEventListener("click", function () {
+  tagImg.style.width = "150%";
 });
 
-const buttonGreen = document.querySelector(".button-green");
-buttonGreen.addEventListener("click", function () {
-  tagP.className = "";
-  tagP.classList.add("text-success");
-});
-
-const buttonRed = document.querySelector(".button-red");
-buttonRed.addEventListener("click", function () {
-  tagP.className = "";
-  tagP.classList.add("text-danger");
+const buttonDecrease = document.querySelector(".decrease");
+buttonDecrease.addEventListener("click", function () {
+  tagImg.style.width = "50%";
 });
