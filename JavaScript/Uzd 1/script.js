@@ -97,24 +97,8 @@ function printGrade(ts) {
   }
 }
 
-// function printGrade(ts) {
-//   if (ts < 29) {
-//     console.log("You failed the exam");
-//   } else if (ts < 35) {
-//     console.log("Your grade is 1");
-//   } else if (ts < 40) {
-//     console.log("Your grade is 2");
-//   } else if (ts < 45) {
-//     console.log("Your grade is 3");
-//   } else if (ts < 50) {
-//     console.log("Your grade is 4");
-//   } else {
-//     console.log("Your grade is 5");
-//   }
-// }
-
-// Sąlyginis sakinys. Apskaičiuokite kūno masės indeksą ir nurodykite reikšmę.
-// Pavyzdys: http://sveikas.lt/lt/kmi-skaiciuokle/#
+// 6. Sąlyginis sakinys. Apskaičiuokite kūno masės indeksą ir nurodykite reikšmę. Pavyzdys: http://sveikas.lt/lt/kmi-skaiciuokle/#
+console.log("\nPart 6:\n");
 
 // Variantų sakinys. Duomenys koduojami skaičiais. Saulėta – 1, lietinga – 2, vėjuota – 3, sniegas – 4. Parenkite programą, kuri įvedus kodą, atspausdintų jo reikšmę.
 
