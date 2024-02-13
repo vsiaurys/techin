@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="lt">
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <title>3 - 4 Darbų sąrašas</title>
+  </head>
+  <body>
+    <div class="container border border-success">
+      <div class="row mt-5">
+        <form name="todolist">
+          <div class="col-8">
+            <!-- Adjusted column size to accommodate input and button in one line -->
+            <input
+              type="text"
+              id="task"
+              class="form-control"
+              placeholder="Įrašykite, ką norite pridėti į sąrašą"
+            />
+          </div>
+          <div class="col-4">
+            <!-- Adjusted column size to accommodate input and button in one line -->
+            <button
+              type="submit"
+              id="add"
+              class="btn btn-primary mb-2"
+            >
+              Pridėti
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <div class="row">
+        <div class="col-6">
+          <p>Sąrašas:</p>
+          <ul id="list"></ul>
+        </div>
+      </div>
+    </div>
+
+    <script src="JS/script.js"></script>
+  </body>
+</html>
