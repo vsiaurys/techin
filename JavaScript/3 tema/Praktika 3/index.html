@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="lt">
+  <head>
+    <meta charset="UTF-8" />
+    <title>03 - 3 KMI</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+  </head>
+
+  <body>
+    <div class="container border border-success">
+      <div class="col-4 mt-5">
+        <form id="form1">
+          <div class="form-group">
+            <label for="height">Įveskite savo ūgį</label>
+            <input
+              type="number"
+              class="form-control"
+              id="height"
+              name="height"
+              min="100"
+              placeholder="Įveskite savo ūgį centimetrais"
+            />
+          </div>
+          <div class="form-group">
+            <label for="weight">Įveskite savo svorį</label>
+            <input
+              type="number"
+              class="form-control"
+              id="weight"
+              name="weight"
+              placeholder="Svoris kg"
+              min="30"
+              max="200"
+            />
+          </div>
+          <button
+            type="submit"
+            class="btn btn-primary"
+          >
+            Skaičiuoti KMI
+          </button>
+        </form>
+
+        <p id="kmi"></p>
+      </div>
+    </div>
+    <script src="script.js"></script
+  </body>
+</html>
