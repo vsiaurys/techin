@@ -1,8 +1,6 @@
-import "./PostContent.css";
-
 export default function PostContent() {
   return (
-    <div className="post__content">
+    <div>
       <h3>Post title</h3>
       <p>
         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quam nisi

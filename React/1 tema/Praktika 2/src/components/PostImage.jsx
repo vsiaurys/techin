@@ -5,7 +5,7 @@ export default function PostImage() {
     <img
       src="../img/tiger.jpg"
       alt="A tiger's portrait"
-      className="rounded-circle w-100 post__image"
+      className="rounded-circle img-fluid image"
     />
   );
 }

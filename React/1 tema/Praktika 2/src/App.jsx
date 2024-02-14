@@ -1,4 +1,3 @@
-import "./App.css";
 import Header from "./components/Header";
 import PostImage from "./components/PostImage";
 import PostContent from "./components/PostContent";
