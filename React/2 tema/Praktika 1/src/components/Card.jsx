@@ -3,7 +3,7 @@ import { useState } from "react";
 export default function Card() {
   const [buttonColor, setButtonColor] = useState(false);
   function changeColor() {
-    setButtonColor(!buttonColor);
+    setButtonColor(true);
   }
 
   return (
