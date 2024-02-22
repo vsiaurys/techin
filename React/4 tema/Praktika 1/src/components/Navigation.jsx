@@ -1,6 +1,7 @@
 import { Route, Routes, NavLink } from "react-router-dom";
 import Home from "./Home";
 import Actor from "./Actor";
+import Movies from "./Movies";
 import Movie from "./Movie";
 import ErrorPage from "./ErrorPage";
 
@@ -30,8 +31,14 @@ export default function Navigation() {
           />
           <Route
             path="/movies"
+            element={<Movies />}
+          />
+
+          <Route
+            path="/movies/:movieId"
             element={<Movie />}
           />
+
           <Route
             path="/actors"
             element={<Actor />}
