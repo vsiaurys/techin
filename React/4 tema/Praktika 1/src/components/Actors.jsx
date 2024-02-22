@@ -2,20 +2,34 @@ import { useState, useEffect } from "react";
 
 export default function Actors() {
   const url = "http://localhost:8080/";
-  const [data, setData] = useState([]);
+  const [actors, setActors] = useState([]);
+  const [deleteId, setDeleteId] = useState(0);
 
-  const getData = async () => {
+  const getActors = async () => {
     const response = await fetch(`${url}actors`, {
       method: "GET",
       headers: { Authorization: "Basic " + btoa("aaaaaaaa:bbbbbbbb") },
     });
     const resp = await response.json();
-    setData(resp);
+    setActors(resp);
+  };
+
+  const deleteActor = async (id) => {
+    try {
+      const response = await fetch(`${url}actors/${id}`, {
+        method: "DELETE",
+        headers: { Authorization: "Basic " + btoa("aaaaaaaa:bbbbbbbb") },
+      });
+    } catch (error) {
+      console.error("Error deleting actor:", error);
+    }
+
+    setDeleteId(id);
   };
 
   useEffect(() => {
-    getData();
-  }, []);
+    getActors();
+  }, [deleteId]);
 
   return (
     <div>
@@ -33,19 +47,28 @@ export default function Actors() {
               <th scope="col">Height (cm)</th>
               <th scope="col">Salary per day</th>
               <th scope="col">Link to actor's picture</th>
+              <th scope="col"></th>
             </tr>
           </thead>
           <tbody>
-            {data.map((d) => {
+            {actors.map((actor) => {
               return (
-                <tr key={d.id}>
-                  <th>{d.id}</th>
-                  <td>{d.name}</td>
-                  <td>{d.sex}</td>
-                  <td>{d.dateOfBirth}</td>
-                  <td>{d.height}</td>
-                  <td>{d.salaryPerDay}</td>
-                  <td>{d.linkToPicture}</td>
+                <tr key={actor.id}>
+                  <th>{actor.id}</th>
+                  <td>{actor.name}</td>
+                  <td>{actor.sex}</td>
+                  <td>{actor.dateOfBirth}</td>
+                  <td>{actor.height}</td>
+                  <td>{actor.salaryPerDay}</td>
+                  <td>{actor.linkToPicture}</td>
+                  <td>
+                    <button
+                      className="btn btn-primary"
+                      onClick={() => deleteActor(actor.id)}
+                    >
+                      Delete
+                    </button>
+                  </td>
                 </tr>
               );
             })}

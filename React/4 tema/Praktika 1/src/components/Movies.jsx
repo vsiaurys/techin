@@ -5,7 +5,7 @@ export default function Movies() {
   const [movies, setMovies] = useState([]);
   const [deleteId, setDeleteId] = useState(0);
 
-  const getData = async () => {
+  const getMovies = async () => {
     const response = await fetch(`${url}movies`, {
       method: "GET",
       headers: { Authorization: "Basic " + btoa("aaaaaaaa:bbbbbbbb") },
@@ -28,7 +28,7 @@ export default function Movies() {
   };
 
   useEffect(() => {
-    getData();
+    getMovies();
   }, [deleteId]);
 
   return (
