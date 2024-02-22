@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 export default function Movies() {
   const url = "http://localhost:8080/";
   const [data, setData] = useState([]);
+  const [del, setDel] = useState(0);
 
   const getData = async () => {
     const response = await fetch(`${url}movies`, {
@@ -13,9 +14,23 @@ export default function Movies() {
     setData(resp);
   };
 
+  const deleteData = async (id) => {
+    console.log(`${url}movies/${id}`);
+    try {
+      const response = await fetch(`${url}movies/${id}`, {
+        method: "DELETE",
+        headers: { Authorization: "Basic " + btoa("aaaaaaaa:bbbbbbbb") },
+      });
+    } catch (error) {
+      console.error("Error deleting movie:", error);
+    }
+
+    setDel(id);
+  };
+
   useEffect(() => {
     getData();
-  }, []);
+  }, [del]);
 
   return (
     <div
@@ -29,6 +44,7 @@ export default function Movies() {
             <th scope="col">Title</th>
             <th scope="col">Date released</th>
             <th scope="col">Length (minutes)</th>
+            <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
@@ -39,6 +55,14 @@ export default function Movies() {
                 <td>{d.title}</td>
                 <td>{d.dateReleased}</td>
                 <td>{d.lengthMinutes}</td>
+                <td>
+                  <button
+                    className="btn btn-primary"
+                    onClick={() => deleteData(d.id)}
+                  >
+                    Delete
+                  </button>
+                </td>
               </tr>
             );
           })}
