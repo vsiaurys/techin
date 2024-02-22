@@ -1,4 +1,4 @@
-import { Route, Routes, NavLink } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Home from "./Home";
 import Actors from "./Actors";
 import Actor from "./Actor";
@@ -6,7 +6,7 @@ import Movies from "./Movies";
 import Movie from "./Movie";
 import ErrorPage from "./ErrorPage";
 
-export default function Header() {
+export default function Main() {
   return (
     <>
       <main>
