@@ -1,14 +1,13 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-export default function Movies() {
-  const url = "http://localhost:8080/";
-  const [data, setData] = useState([]);
+export default function Movie() {
+  const url = "http://localhost:8080/movies/";
+  const [data, setData] = useState(null);
   const { movieId } = useParams();
 
   const getData = async () => {
-    console.log(`${url}movies/${movieId}`);
-    const response = await fetch(`${url}movies/${movieId}`, {
+    const response = await fetch(`${url}${movieId}`, {
       method: "GET",
       headers: { Authorization: "Basic " + btoa("aaaaaaaa:bbbbbbbb") },
     });
@@ -34,14 +33,17 @@ export default function Movies() {
             <th scope="col">Length (minutes)</th>
           </tr>
         </thead>
-        <tbody>
-          <tr key={data.id}>
-            <th scope="row">{data.id}</th>
-            <td>{data.title}</td>
-            <td>{data.dateReleased}</td>
-            <td>{data.lengthMinutes}</td>
-          </tr>
-        </tbody>
+
+        {data && (
+          <tbody>
+            <tr key={data.id}>
+              <th scope="row">{data.id}</th>
+              <td>{data.title}</td>
+              <td>{data.dateReleased}</td>
+              <td>{data.lengthMinutes}</td>
+            </tr>
+          </tbody>
+        )}
       </table>
     </div>
   );
