@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 
 export default function Movies() {
   const url = "http://localhost:8080/";
-  const [data, setData] = useState([]);
-  const [del, setDel] = useState(0);
+  const [movies, setMovies] = useState([]);
+  const [deleteId, setDeleteId] = useState(0);
 
   const getData = async () => {
     const response = await fetch(`${url}movies`, {
@@ -11,11 +11,10 @@ export default function Movies() {
       headers: { Authorization: "Basic " + btoa("aaaaaaaa:bbbbbbbb") },
     });
     const resp = await response.json();
-    setData(resp);
+    setMovies(resp);
   };
 
-  const deleteData = async (id) => {
-    console.log(`${url}movies/${id}`);
+  const deleteMovie = async (id) => {
     try {
       const response = await fetch(`${url}movies/${id}`, {
         method: "DELETE",
@@ -25,12 +24,12 @@ export default function Movies() {
       console.error("Error deleting movie:", error);
     }
 
-    setDel(id);
+    setDeleteId(id);
   };
 
   useEffect(() => {
     getData();
-  }, [del]);
+  }, [deleteId]);
 
   return (
     <div
@@ -48,17 +47,17 @@ export default function Movies() {
           </tr>
         </thead>
         <tbody>
-          {data.map((d) => {
+          {movies.map((movie) => {
             return (
-              <tr key={d.id}>
-                <th scope="row">{d.id}</th>
-                <td>{d.title}</td>
-                <td>{d.dateReleased}</td>
-                <td>{d.lengthMinutes}</td>
+              <tr key={movie.id}>
+                <th scope="row">{movie.id}</th>
+                <td>{movie.title}</td>
+                <td>{movie.dateReleased}</td>
+                <td>{movie.lengthMinutes}</td>
                 <td>
                   <button
                     className="btn btn-primary"
-                    onClick={() => deleteData(d.id)}
+                    onClick={() => deleteMovie(movie.id)}
                   >
                     Delete
                   </button>
